@@ -7,6 +7,8 @@ import { useLanguage } from "../../lib/i18n/i18n-context";
 import { WeatherService } from "../../lib/services/weather.service";
 import { WeatherData } from "../../lib/types";
 import { DhartiMaaChatModal } from "../../components/dharti-maa/dharti-maa-chat-modal";
+import { PhotoEditorModal } from "../../components/profile/photo-editor-modal";
+import { AuthService } from "../../lib/services/auth.service";
 import {
   Sprout,
   CloudSun,
@@ -21,14 +23,21 @@ import {
   AlertTriangle,
   Plus,
   Compass,
+  Camera,
 } from "lucide-react";
 
 export default function DashboardPage() {
-  const { currentUser, farmers, userCoords, requestLocation, connectWithFarmer, connectedFarmerIds } = useApp();
+  const { currentUser, setCurrentUser, farmers, userCoords, requestLocation, connectWithFarmer, connectedFarmerIds } = useApp();
   const { language, t } = useLanguage();
 
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [dhartiMaaOpen, setDhartiMaaOpen] = useState(false);
+  const [photoEditorOpen, setPhotoEditorOpen] = useState(false);
+
+  const handlePhotoSaved = (newUrl: string) => {
+    const updated = AuthService.updateUserProfile({ avatarUrl: newUrl });
+    setCurrentUser(updated);
+  };
 
   useEffect(() => {
     async function loadWeather() {
@@ -52,17 +61,43 @@ export default function DashboardPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 pb-20">
       {/* 1. Header Banner with Farmer Greeting & Quick Actions */}
       <div className="rounded-3xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-green-900 text-white p-6 sm:p-8 shadow-xl border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/30 border border-emerald-400/40 text-emerald-200 text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
-            <span>Farm Operations Active</span>
+        <div className="flex items-center gap-5">
+          {/* Farmer Profile Avatar with Edit Button */}
+          <div className="relative group shrink-0">
+            <img
+              src={currentUser?.avatarUrl || "https://images.unsplash.com/photo-1544717305-2782549b5136?w=200"}
+              alt={currentUser?.name || "Farmer"}
+              className="w-20 h-20 rounded-full object-cover border-3 border-yellow-400 shadow-xl"
+            />
+            <button
+              onClick={() => setPhotoEditorOpen(true)}
+              className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity font-bold text-[10px] cursor-pointer"
+              title="Edit Profile Photo"
+            >
+              <Camera className="w-5 h-5 mb-0.5" />
+              <span>Edit</span>
+            </button>
+            <button
+              onClick={() => setPhotoEditorOpen(true)}
+              className="absolute -bottom-1 -right-1 p-2 rounded-full bg-yellow-400 text-emerald-950 hover:bg-yellow-300 shadow-md transition-transform active:scale-95 cursor-pointer"
+              title="Edit Profile Photo"
+            >
+              <Camera className="w-3.5 h-3.5" />
+            </button>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Welcome back, {currentUser?.name || "Kisan Friend"} 🌱
-          </h1>
-          <p className="text-xs sm:text-sm text-emerald-200 max-w-xl">
-            {currentUser?.district}, {currentUser?.state} • Cultivating: {currentUser?.crops?.join(", ") || "Wheat, Basmati"}
-          </p>
+
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-500/30 border border-emerald-400/40 text-emerald-200 text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
+              <span>Farm Operations Active • {currentUser?.landArea || "12.5 Acres"}</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Welcome back, {currentUser?.name || "Kisan Friend"} 🌱
+            </h1>
+            <p className="text-xs sm:text-sm text-emerald-200 max-w-xl">
+              {currentUser?.district}, {currentUser?.state} • Cultivating: {currentUser?.crops?.join(", ") || "Wheat, Basmati"}
+            </p>
+          </div>
         </div>
 
         {/* Quick Action Buttons */}
@@ -333,6 +368,14 @@ export default function DashboardPage() {
 
       {/* Interactive Dharti Maa Modal */}
       <DhartiMaaChatModal isOpen={dhartiMaaOpen} onClose={() => setDhartiMaaOpen(false)} />
+
+      {/* Interactive Profile Photo Editor Modal */}
+      <PhotoEditorModal
+        isOpen={photoEditorOpen}
+        onClose={() => setPhotoEditorOpen(false)}
+        currentPhotoUrl={currentUser?.avatarUrl}
+        onPhotoSaved={handlePhotoSaved}
+      />
     </div>
   );
 }

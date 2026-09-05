@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useApp } from "../../lib/store/app-store";
 import { AuthService } from "../../lib/services/auth.service";
 import { indianStatesAndDistricts } from "../../lib/services/location.service";
-import { User, Phone, Mail, MapPin, Sprout, Briefcase, Award, Check, Save } from "lucide-react";
+import { PhotoEditorModal } from "../../components/profile/photo-editor-modal";
+import { User, Phone, Mail, MapPin, Sprout, Briefcase, Award, Check, Save, Camera, Upload, Sliders } from "lucide-react";
 
 export default function ProfilePage() {
   const { currentUser, setCurrentUser } = useApp();
@@ -25,6 +26,15 @@ export default function ProfilePage() {
 
   const [cropInput, setCropInput] = useState("");
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [photoEditorOpen, setPhotoEditorOpen] = useState(false);
+
+  const handlePhotoSaved = (newUrl: string) => {
+    setFormData((prev) => ({ ...prev, avatarUrl: newUrl }));
+    const updated = AuthService.updateUserProfile({ avatarUrl: newUrl });
+    setCurrentUser(updated);
+    setSaveSuccess(true);
+    setTimeout(() => setSaveSuccess(false), 3000);
+  };
 
   useEffect(() => {
     if (currentUser) {
@@ -89,22 +99,76 @@ export default function ProfilePage() {
         </div>
 
         <form onSubmit={handleSave} className="space-y-6 text-xs">
-          {/* Avatar Section */}
-          <div className="flex items-center gap-5">
-            <img
-              src={formData.avatarUrl || "https://images.unsplash.com/photo-1544717305-2782549b5136?w=200"}
-              alt="Farmer Photo"
-              className="w-20 h-20 rounded-full object-cover border-2 border-emerald-600 shadow"
-            />
-            <div className="space-y-1">
-              <label className="font-bold text-stone-800 dark:text-stone-200">Photo URL</label>
+          {/* Avatar Studio Section */}
+          <div className="p-5 rounded-2xl bg-stone-50 dark:bg-emerald-900/30 border border-stone-200 dark:border-emerald-800 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+            <div className="flex items-center gap-5">
+              <div className="relative group shrink-0">
+                <img
+                  src={formData.avatarUrl || "https://images.unsplash.com/photo-1544717305-2782549b5136?w=200"}
+                  alt="Farmer Photo"
+                  className="w-24 h-24 rounded-full object-cover border-4 border-emerald-600 shadow-md"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPhotoEditorOpen(true)}
+                  className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity font-bold text-xs cursor-pointer"
+                  title="Edit & Crop Photo"
+                >
+                  <Camera className="w-6 h-6 mb-0.5" />
+                  <span>Edit</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPhotoEditorOpen(true)}
+                  className="absolute -bottom-1 -right-1 p-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition-transform active:scale-95 cursor-pointer"
+                  title="Edit & Crop Photo"
+                >
+                  <Camera className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-extrabold text-stone-900 dark:text-stone-100 text-sm">
+                    Profile Photograph & Digital ID
+                  </h3>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 text-[10px] font-bold border border-emerald-300 dark:border-emerald-700">
+                    Live Photo API Active
+                  </span>
+                </div>
+                <p className="text-[11px] text-stone-500 dark:text-stone-400 max-w-sm">
+                  Upload any image from your mobile device, snap via camera, apply crop & filters, or AI auto-tune.
+                </p>
+                <div className="pt-1.5 flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPhotoEditorOpen(true)}
+                    className="px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+                  >
+                    <Sliders className="w-3.5 h-3.5" />
+                    <span>Open Photo Studio</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPhotoEditorOpen(true)}
+                    className="px-3 py-1.5 rounded-xl bg-white dark:bg-emerald-900/60 border border-stone-200 dark:border-emerald-700 text-stone-700 dark:text-stone-200 hover:bg-stone-100 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Upload className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Upload Image</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full sm:w-64 space-y-1">
+              <label className="font-bold text-stone-700 dark:text-stone-300 text-[11px]">Direct Image URL</label>
               <input
                 type="text"
                 value={formData.avatarUrl}
                 onChange={(e) => setFormData({ ...formData, avatarUrl: e.target.value })}
-                className="w-full sm:w-96 px-3 py-2 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                placeholder="https://..."
+                className="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-emerald-800 bg-white dark:bg-emerald-950 text-stone-900 dark:text-stone-100 text-xs"
               />
-              <p className="text-[10px] text-stone-400">Direct image link for farmer verification</p>
             </div>
           </div>
 
@@ -267,7 +331,7 @@ export default function ProfilePage() {
           <div className="pt-4 border-t border-stone-200 dark:border-emerald-800 flex justify-end">
             <button
               type="submit"
-              className="px-6 py-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-2xl shadow flex items-center gap-2"
+              className="px-6 py-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-2xl shadow flex items-center gap-2 cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>Save Profile Changes</span>
@@ -275,6 +339,14 @@ export default function ProfilePage() {
           </div>
         </form>
       </div>
+
+      {/* Interactive Photo Editor Modal Studio */}
+      <PhotoEditorModal
+        isOpen={photoEditorOpen}
+        onClose={() => setPhotoEditorOpen(false)}
+        currentPhotoUrl={formData.avatarUrl}
+        onPhotoSaved={handlePhotoSaved}
+      />
     </div>
   );
 }
