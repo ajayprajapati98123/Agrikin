@@ -110,6 +110,14 @@ export interface CropRecommendation {
   riskFactors: string[];
   farmingMethodTips: string[];
   cropRotationConsiderations: string;
+  expectedYield?: string;
+  liveMarketPrice?: string;
+  estimatedRevenuePerAcre?: string;
+  estimatedNetProfitPerAcre?: string;
+  mspRate?: string;
+  marketTrend?: string;
+  roiPercentage?: number;
+  totalEstimatedNetProfit?: number;
 }
 
 export interface GovernmentScheme {
