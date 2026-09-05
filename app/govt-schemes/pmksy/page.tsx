@@ -12,21 +12,21 @@ export default function PMKSYPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8 pb-24">
       <Link
         href="/govt-schemes"
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-300 hover:underline"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-800 dark:text-cyan-300 hover:underline"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to All Schemes</span>
       </Link>
 
-      <div className="bg-white dark:bg-emerald-950 rounded-3xl p-6 sm:p-10 border border-stone-200 dark:border-emerald-800 shadow-xl space-y-8">
-        <div className="space-y-3 pb-6 border-b border-stone-200 dark:border-emerald-800">
+      <div className="bg-[#FFFEFD] dark:bg-[#082933] rounded-3xl p-6 sm:p-10 border border-[#EAE3D5] dark:border-cyan-800 shadow-xl space-y-8">
+        <div className="space-y-3 pb-6 border-b border-[#EAE3D5] dark:border-cyan-800">
           <div className="flex items-center justify-between">
             <span className="text-4xl">💧</span>
             <a
               href="https://www.pmksy.gov.in/"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow"
+              className="px-4 py-2 bg-gradient-to-r from-cyan-800 to-teal-800 hover:from-cyan-700 hover:to-teal-700 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow"
             >
               <span>Visit PMKSY National Portal</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -35,7 +35,7 @@ export default function PMKSYPage() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100">
             PRADHAN MANTRI KRISHI SINCHAYI YOJANA (PMKSY)
           </h1>
-          <p className="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-400">
+          <p className="text-xs sm:text-sm font-semibold text-cyan-700 dark:text-cyan-400">
             Theme: "Har Khet Ko Pani" • Sub-Theme: "Per Drop More Crop"
           </p>
         </div>
@@ -48,14 +48,14 @@ export default function PMKSYPage() {
               Precision micro-irrigation systems (Drip and Sprinkler) providing up to 55% direct financial subsidy for small & marginal farmers.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 space-y-1">
-            <div className="font-bold text-blue-900 dark:text-blue-200">2. Har Khet Ko Pani (HKKP)</div>
+          <div className="p-4 rounded-2xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800 space-y-1">
+            <div className="font-bold text-sky-900 dark:text-sky-200">2. Har Khet Ko Pani (HKKP)</div>
             <p className="text-stone-600 dark:text-stone-300">
               Creating new water sources through minor irrigation, command area development, and reviving traditional water bodies.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 space-y-1">
-            <div className="font-bold text-emerald-900 dark:text-emerald-200">3. Accelerated Irrigation Benefit (AIBP)</div>
+          <div className="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800 space-y-1">
+            <div className="font-bold text-teal-900 dark:text-teal-200">3. Accelerated Irrigation Benefit (AIBP)</div>
             <p className="text-stone-600 dark:text-stone-300">
               Expedited completion of major and medium canal irrigation infrastructure across river valley basins.
             </p>
@@ -69,8 +69,8 @@ export default function PMKSYPage() {
         </div>
 
         {/* Subsidy Info */}
-        <div className="p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-950 dark:text-emerald-100 space-y-2">
-          <h3 className="font-bold text-sm text-emerald-900 dark:text-emerald-300">
+        <div className="p-5 rounded-2xl bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 dark:border-cyan-800 text-xs text-cyan-950 dark:text-cyan-100 space-y-2">
+          <h3 className="font-bold text-sm text-cyan-900 dark:text-cyan-300">
             💰 Micro-Irrigation Subsidy Scale
           </h3>
           <p className="leading-relaxed">
@@ -82,13 +82,13 @@ export default function PMKSYPage() {
         {/* Eligibility Criteria */}
         <div className="space-y-3 text-xs">
           <h3 className="font-bold text-sm text-stone-900 dark:text-stone-100 flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-cyan-600" />
             <span>Eligibility Criteria</span>
           </h3>
           <ul className="space-y-2 text-stone-600 dark:text-stone-300">
             {scheme.eligibility.map((el, i) => (
               <li key={i} className="flex items-start gap-2 leading-relaxed">
-                <span className="text-emerald-600 font-bold">•</span>
+                <span className="text-cyan-600 font-bold">•</span>
                 <span>{el}</span>
               </li>
             ))}
@@ -102,8 +102,8 @@ export default function PMKSYPage() {
           </h3>
           <div className="space-y-3">
             {scheme.stepByStepProcess.map((step, i) => (
-              <div key={i} className="flex items-start gap-3 p-3.5 rounded-2xl bg-stone-50 dark:bg-emerald-900/20 border border-stone-200 dark:border-emerald-800">
-                <span className="w-6 h-6 rounded-full bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-xs">
+              <div key={i} className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FAF7F0] dark:bg-cyan-900/20 border border-[#EAE3D5] dark:border-cyan-800">
+                <span className="w-6 h-6 rounded-full bg-cyan-800 text-white font-bold flex items-center justify-center shrink-0 text-xs">
                   {i + 1}
                 </span>
                 <span className="text-stone-700 dark:text-stone-300 leading-relaxed pt-0.5">{step}</span>
@@ -113,16 +113,16 @@ export default function PMKSYPage() {
         </div>
 
         {/* Official Link */}
-        <div className="p-6 rounded-2xl bg-gradient-to-r from-teal-900 to-emerald-950 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-gradient-to-r from-[#083344] via-[#0E4A5C] to-[#042129] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="font-bold text-sm">Pradhan Mantri Krishi Sinchayi Yojana National Portal:</div>
-            <div className="text-xs text-teal-200">Visit https://www.pmksy.gov.in/ for circulars and state MIS links</div>
+            <div className="text-xs text-cyan-200">Visit https://www.pmksy.gov.in/ for circulars and state MIS links</div>
           </div>
           <a
             href="https://www.pmksy.gov.in/"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-emerald-950 font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow"
+            className="px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-[#083344] font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow"
           >
             <span>Open PMKSY Portal</span>
             <ExternalLink className="w-4 h-4" />

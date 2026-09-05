@@ -19,9 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#0a381e" />
+        <meta name="theme-color" content="#083344" />
       </head>
-      <body className="min-h-screen flex flex-col antialiased selection:bg-emerald-200 selection:text-emerald-950">
+      <body className="min-h-screen flex flex-col antialiased selection:bg-cyan-200 selection:text-cyan-950">
         <I18nProvider>
           <AppProvider>
             {/* Header Navigation */}

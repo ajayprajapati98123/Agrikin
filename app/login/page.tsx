@@ -47,20 +47,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-72px)] bg-gradient-to-b from-stone-100 via-emerald-50/30 to-stone-100 dark:from-emerald-950 dark:via-emerald-900/30 dark:to-emerald-950 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <div className="min-h-[calc(100vh-72px)] bg-gradient-to-b from-[#FAF7F0] via-[#F3EFE6] to-[#FAF7F0] py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-md w-full">
-        {/* Centered Glass / Soft Card */}
-        <div className="relative rounded-3xl bg-white/90 dark:bg-emerald-900/70 backdrop-blur-xl p-8 sm:p-10 shadow-2xl border border-emerald-500/20 text-center space-y-6">
+        {/* Centered Glass / Milk Porcelain Card */}
+        <div className="relative rounded-3xl bg-[#FFFEFD] p-8 sm:p-10 shadow-2xl border border-[#EAE3D5] text-center space-y-6">
           {/* Logo */}
           <div className="flex justify-center">
             <BrandLogo size="lg" showWordmark={true} />
           </div>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
               ȺցɾìҠìղ Login
             </h1>
-            <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+            <p className="text-xs sm:text-sm text-stone-500 mt-1">
               Sign in to manage your farm, check live weather & match with traders.
             </p>
           </div>
@@ -69,14 +69,14 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={fillDemoAccount}
-            className="w-full py-2 px-3 bg-emerald-100/70 dark:bg-emerald-800/40 hover:bg-emerald-200/60 dark:hover:bg-emerald-700/50 rounded-xl border border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+            className="w-full py-2 px-3 bg-cyan-50 hover:bg-cyan-100/70 rounded-xl border border-cyan-200 text-cyan-900 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
           >
-            <Sparkles className="w-3.5 h-3.5 text-yellow-600 dark:text-yellow-400" />
+            <Sparkles className="w-3.5 h-3.5 text-cyan-700" />
             <span>Click to autofill sample farmer credentials</span>
           </button>
 
           {error && (
-            <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-xs flex items-center gap-2 text-left">
+            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2 text-left">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -85,7 +85,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4 text-left text-xs">
             {/* Email Address */}
             <div>
-              <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+              <label className="block font-semibold text-stone-700 mb-1">
                 📧 Email Address
               </label>
               <div className="relative">
@@ -96,7 +96,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="kisan@agrikin.in"
-                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-950 text-stone-900 dark:text-stone-100 focus:ring-2 focus:ring-emerald-600 focus:outline-none"
+                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                 />
               </div>
             </div>
@@ -104,13 +104,13 @@ export default function LoginPage() {
             {/* Password */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="font-semibold text-stone-700 dark:text-stone-300">
+                <label className="font-semibold text-stone-700">
                   🔒 Password
                 </label>
                 <button
                   type="button"
                   onClick={() => alert("Password reset token dispatched to registered mobile number.")}
-                  className="text-[11px] text-emerald-700 dark:text-emerald-400 hover:underline font-semibold"
+                  className="text-[11px] text-cyan-700 hover:underline font-semibold"
                 >
                   Forgot your password?
                 </button>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-950 text-stone-900 dark:text-stone-100 focus:ring-2 focus:ring-emerald-600 focus:outline-none"
+                  className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
                 />
                 <button
                   type="button"
@@ -140,7 +140,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-50"
+                className="w-full py-3.5 bg-gradient-to-r from-cyan-800 to-teal-800 hover:from-cyan-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-50"
               >
                 {loading ? "Authenticating..." : "Log In"}
                 <ArrowRight className="w-4 h-4" />
@@ -149,9 +149,9 @@ export default function LoginPage() {
           </form>
 
           {/* Bottom Link to Signup */}
-          <div className="pt-4 border-t border-stone-200 dark:border-emerald-800/80 text-xs text-stone-500 dark:text-stone-400">
+          <div className="pt-4 border-t border-[#EAE3D5] text-xs text-stone-500">
             Don't have an account?{" "}
-            <Link href="/signup" className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline">
+            <Link href="/signup" className="text-cyan-700 font-bold hover:underline">
               Sign Up
             </Link>
           </div>

@@ -311,21 +311,21 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-white dark:bg-emerald-950 rounded-3xl shadow-2xl border border-emerald-500/30 flex flex-col max-h-[92vh] overflow-hidden text-stone-900 dark:text-stone-100">
+      <div className="relative w-full max-w-2xl bg-white dark:bg-[#082933] rounded-3xl shadow-2xl border border-cyan-500/30 flex flex-col max-h-[92vh] overflow-hidden text-stone-900 dark:text-stone-100">
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-green-950 px-6 py-4 text-white flex items-center justify-between shadow-md">
+        <div className="bg-gradient-to-r from-[#083344] via-[#0E4A5C] to-[#042129] px-6 py-4 text-white flex items-center justify-between shadow-md">
           <div className="flex items-center gap-2.5">
-            <span className="p-2 rounded-xl bg-emerald-700/60 border border-emerald-400/40">
-              <ImageIcon className="w-4 h-4 text-emerald-200" />
+            <span className="p-2 rounded-xl bg-cyan-700/60 border border-cyan-400/40">
+              <ImageIcon className="w-4 h-4 text-cyan-200" />
             </span>
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-bold text-base leading-tight">Farmer Profile Photo Studio</h3>
-                <span className="bg-emerald-500/30 text-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-400/40">
+                <span className="bg-cyan-500/30 text-cyan-200 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-cyan-400/40">
                   Live Editor API
                 </span>
               </div>
-              <p className="text-[11px] text-emerald-200/90">
+              <p className="text-[11px] text-cyan-200/90">
                 Upload, crop, filter, and AI-enhance your dashboard & Krishi Connect profile picture
               </p>
             </div>
@@ -341,7 +341,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
         {/* Content Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-6 flex-1 text-xs">
           {/* Top Action Bar: Upload or Camera */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-stone-50 dark:bg-emerald-900/40 p-3 rounded-2xl border border-stone-200 dark:border-emerald-800">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-stone-50 dark:bg-cyan-900/40 p-3 rounded-2xl border border-stone-200 dark:border-cyan-800">
             <div className="flex items-center gap-2">
               <input
                 type="file"
@@ -353,7 +353,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3.5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bold flex items-center gap-1.5 transition-all shadow-xs"
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-700 to-teal-700 hover:from-cyan-600 hover:to-teal-600 text-white font-bold flex items-center gap-1.5 transition-all shadow-xs"
               >
                 <Upload className="w-3.5 h-3.5" />
                 <span>Upload From Device</span>
@@ -363,9 +363,9 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                 <button
                   type="button"
                   onClick={startCamera}
-                  className="px-3.5 py-2 rounded-xl bg-white dark:bg-emerald-800 border border-stone-200 dark:border-emerald-700 hover:bg-stone-100 text-stone-700 dark:text-stone-200 font-bold flex items-center gap-1.5 transition-all shadow-xs"
+                  className="px-3.5 py-2 rounded-xl bg-white dark:bg-cyan-800 border border-stone-200 dark:border-cyan-700 hover:bg-stone-100 text-stone-700 dark:text-stone-200 font-bold flex items-center gap-1.5 transition-all shadow-xs"
                 >
-                  <Camera className="w-3.5 h-3.5 text-emerald-600" />
+                  <Camera className="w-3.5 h-3.5 text-cyan-600" />
                   <span>Use Camera</span>
                 </button>
               ) : (
@@ -386,28 +386,28 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
               onClick={handleAiAutoEnhance}
               className={`px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 transition-all shadow-xs ${
                 aiEnhanceActive
-                  ? "bg-amber-500 text-emerald-950 ring-2 ring-amber-300"
-                  : "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 text-emerald-950"
+                  ? "bg-amber-500 text-[#083344] ring-2 ring-amber-300"
+                  : "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 text-[#083344]"
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>AI Auto-Enhance</span>
-              {aiScore && <span className="bg-emerald-950/20 px-1.5 py-0.5 rounded text-[10px]">{aiScore}%</span>}
+              {aiScore && <span className="bg-cyan-950/20 px-1.5 py-0.5 rounded text-[10px]">{aiScore}%</span>}
             </button>
           </div>
 
           {/* Main Visual Editor Workspace */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
             {/* Left: Viewport Preview */}
-            <div className="flex flex-col items-center justify-center p-4 bg-stone-100 dark:bg-emerald-900/30 rounded-3xl border border-stone-200 dark:border-emerald-800/80 relative">
+            <div className="flex flex-col items-center justify-center p-4 bg-stone-100 dark:bg-cyan-900/30 rounded-3xl border border-stone-200 dark:border-cyan-800/80 relative">
               {isCameraActive ? (
-                <div className="w-72 h-72 rounded-full overflow-hidden relative border-4 border-emerald-500 shadow-xl bg-black">
+                <div className="w-72 h-72 rounded-full overflow-hidden relative border-4 border-cyan-500 shadow-xl bg-black">
                   <video ref={videoRef} className="w-full h-full object-cover" autoPlay playsInline muted />
                   <div className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-black/60 to-transparent">
                     <button
                       type="button"
                       onClick={captureCameraPhoto}
-                      className="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold shadow-lg flex items-center gap-1.5 text-xs animate-pulse"
+                      className="px-4 py-2 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold shadow-lg flex items-center gap-1.5 text-xs animate-pulse"
                     >
                       <Camera className="w-4 h-4" />
                       <span>Take Photo</span>
@@ -418,7 +418,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                 <div className="relative group">
                   {/* Round Avatar Cutout Window */}
                   <div
-                    className="w-72 h-72 rounded-full overflow-hidden border-4 border-emerald-600 dark:border-emerald-500 shadow-2xl bg-stone-900 flex items-center justify-center cursor-grab active:cursor-grabbing relative"
+                    className="w-72 h-72 rounded-full overflow-hidden border-4 border-cyan-600 dark:border-cyan-500 shadow-2xl bg-stone-900 flex items-center justify-center cursor-grab active:cursor-grabbing relative"
                     onMouseDown={handleMouseDown}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
@@ -432,8 +432,8 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                   </div>
 
                   {/* Drag reposition hint */}
-                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full bg-emerald-950/80 text-white text-[10px] font-semibold flex items-center gap-1 border border-emerald-600/40 shadow-sm pointer-events-none">
-                    <Move className="w-3 h-3 text-emerald-400" />
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full bg-[#082933] text-white text-[10px] font-semibold flex items-center gap-1 border border-cyan-600/40 shadow-sm pointer-events-none">
+                    <Move className="w-3 h-3 text-cyan-400" />
                     <span>Drag to reposition</span>
                   </div>
                 </div>
@@ -444,7 +444,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setRotation((prev) => (prev - 90) % 360)}
-                  className="p-2 rounded-xl bg-white dark:bg-emerald-800 border border-stone-200 dark:border-emerald-700 hover:bg-stone-50 text-stone-700 dark:text-stone-200 transition-all shadow-xs"
+                  className="p-2 rounded-xl bg-white dark:bg-cyan-800 border border-stone-200 dark:border-cyan-700 hover:bg-stone-50 text-stone-700 dark:text-stone-200 transition-all shadow-xs"
                   title="Rotate Left 90°"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -452,7 +452,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setRotation((prev) => (prev + 90) % 360)}
-                  className="p-2 rounded-xl bg-white dark:bg-emerald-800 border border-stone-200 dark:border-emerald-700 hover:bg-stone-50 text-stone-700 dark:text-stone-200 transition-all shadow-xs"
+                  className="p-2 rounded-xl bg-white dark:bg-cyan-800 border border-stone-200 dark:border-cyan-700 hover:bg-stone-50 text-stone-700 dark:text-stone-200 transition-all shadow-xs"
                   title="Rotate Right 90°"
                 >
                   <RotateCw className="w-3.5 h-3.5" />
@@ -462,8 +462,8 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                   onClick={() => setIsFlipped((prev) => !prev)}
                   className={`p-2 rounded-xl border transition-all shadow-xs ${
                     isFlipped
-                      ? "bg-emerald-700 text-white border-emerald-600"
-                      : "bg-white dark:bg-emerald-800 border-stone-200 dark:border-emerald-700 text-stone-700 dark:text-stone-200"
+                      ? "bg-cyan-700 text-white border-cyan-600"
+                      : "bg-white dark:bg-cyan-800 border-stone-200 dark:border-cyan-700 text-stone-700 dark:text-stone-200"
                   }`}
                   title="Flip Horizontal"
                 >
@@ -472,7 +472,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                 <button
                   type="button"
                   onClick={resetAdjustments}
-                  className="p-2 rounded-xl bg-white dark:bg-emerald-800 border border-stone-200 dark:border-emerald-700 hover:bg-stone-50 text-stone-700 dark:text-stone-200 transition-all shadow-xs"
+                  className="p-2 rounded-xl bg-white dark:bg-cyan-800 border border-stone-200 dark:border-cyan-700 hover:bg-stone-50 text-stone-700 dark:text-stone-200 transition-all shadow-xs"
                   title="Reset All Adjustments"
                 >
                   <RefreshCw className="w-3.5 h-3.5" />
@@ -483,13 +483,13 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
             {/* Right: Controls Tab Panel */}
             <div className="space-y-4">
               {/* Tab Navigation */}
-              <div className="flex border-b border-stone-200 dark:border-emerald-800 pb-2 gap-2">
+              <div className="flex border-b border-stone-200 dark:border-cyan-800 pb-2 gap-2">
                 <button
                   type="button"
                   onClick={() => setActiveTab("adjust")}
                   className={`pb-1 px-3 font-bold transition-colors ${
                     activeTab === "adjust"
-                      ? "text-emerald-700 dark:text-emerald-400 border-b-2 border-emerald-600"
+                      ? "text-cyan-700 dark:text-cyan-400 border-b-2 border-cyan-600"
                       : "text-stone-500 hover:text-stone-800 dark:hover:text-stone-200"
                   }`}
                 >
@@ -500,7 +500,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                   onClick={() => setActiveTab("filters")}
                   className={`pb-1 px-3 font-bold transition-colors ${
                     activeTab === "filters"
-                      ? "text-emerald-700 dark:text-emerald-400 border-b-2 border-emerald-600"
+                      ? "text-cyan-700 dark:text-cyan-400 border-b-2 border-cyan-600"
                       : "text-stone-500 hover:text-stone-800 dark:hover:text-stone-200"
                   }`}
                 >
@@ -511,7 +511,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                   onClick={() => setActiveTab("samples")}
                   className={`pb-1 px-3 font-bold transition-colors ${
                     activeTab === "samples"
-                      ? "text-emerald-700 dark:text-emerald-400 border-b-2 border-emerald-600"
+                      ? "text-cyan-700 dark:text-cyan-400 border-b-2 border-cyan-600"
                       : "text-stone-500 hover:text-stone-800 dark:hover:text-stone-200"
                   }`}
                 >
@@ -526,7 +526,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                   <div className="space-y-1">
                     <div className="flex justify-between text-[11px] font-semibold text-stone-600 dark:text-stone-300">
                       <span className="flex items-center gap-1">
-                        <ZoomIn className="w-3.5 h-3.5 text-emerald-600" /> Zoom Scale
+                        <ZoomIn className="w-3.5 h-3.5 text-cyan-600" /> Zoom Scale
                       </span>
                       <span>{Math.round(zoom * 100)}%</span>
                     </div>
@@ -537,7 +537,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                       step="0.05"
                       value={zoom}
                       onChange={(e) => setZoom(parseFloat(e.target.value))}
-                      className="w-full accent-emerald-600 cursor-pointer"
+                      className="w-full accent-cyan-600 cursor-pointer"
                     />
                   </div>
 
@@ -555,7 +555,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                       max="50"
                       value={brightness}
                       onChange={(e) => setBrightness(parseInt(e.target.value))}
-                      className="w-full accent-emerald-600 cursor-pointer"
+                      className="w-full accent-cyan-600 cursor-pointer"
                     />
                   </div>
 
@@ -573,7 +573,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                       max="50"
                       value={contrast}
                       onChange={(e) => setContrast(parseInt(e.target.value))}
-                      className="w-full accent-emerald-600 cursor-pointer"
+                      className="w-full accent-cyan-600 cursor-pointer"
                     />
                   </div>
 
@@ -591,7 +591,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                       max="50"
                       value={saturation}
                       onChange={(e) => setSaturation(parseInt(e.target.value))}
-                      className="w-full accent-emerald-600 cursor-pointer"
+                      className="w-full accent-cyan-600 cursor-pointer"
                     />
                   </div>
                 </div>
@@ -613,8 +613,8 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                       onClick={() => setActiveFilter(f.id as FilterPreset)}
                       className={`p-2.5 rounded-xl border text-left transition-all ${
                         activeFilter === f.id
-                          ? "border-emerald-600 bg-emerald-50 dark:bg-emerald-900/60 font-bold"
-                          : "border-stone-200 dark:border-emerald-800/80 hover:bg-stone-50 dark:hover:bg-emerald-900/30"
+                          ? "border-cyan-600 bg-cyan-50 dark:bg-cyan-900/60 font-bold"
+                          : "border-stone-200 dark:border-cyan-800/80 hover:bg-stone-50 dark:hover:bg-cyan-900/30"
                       }`}
                     >
                       <div className="text-xs text-stone-900 dark:text-stone-100">{f.name}</div>
@@ -635,7 +635,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
                         setSelectedImage(s.url);
                         resetAdjustments();
                       }}
-                      className="p-2 rounded-xl border border-stone-200 dark:border-emerald-800 hover:border-emerald-500 flex items-center gap-2 bg-stone-50 dark:bg-emerald-900/40 text-left transition-all"
+                      className="p-2 rounded-xl border border-stone-200 dark:border-cyan-800 hover:border-cyan-500 flex items-center gap-2 bg-stone-50 dark:bg-cyan-900/40 text-left transition-all"
                     >
                       <img src={s.url} alt={s.name} className="w-9 h-9 rounded-full object-cover border" />
                       <span className="text-[11px] font-semibold text-stone-800 dark:text-stone-200 leading-tight">
@@ -647,12 +647,12 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
               )}
 
               {/* AI Verification Notice */}
-              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-[10px] text-emerald-900 dark:text-emerald-200 space-y-1">
+              <div className="p-3 rounded-xl bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 dark:border-cyan-800 text-[10px] text-cyan-950 dark:text-cyan-200 space-y-1">
                 <div className="font-bold flex items-center gap-1">
-                  <Check className="w-3 h-3 text-emerald-600" />
+                  <Check className="w-3 h-3 text-cyan-600" />
                   <span>Instant Cross-Platform Sync</span>
                 </div>
-                <p className="text-emerald-700 dark:text-emerald-300">
+                <p className="text-cyan-700 dark:text-cyan-300">
                   Saving will immediately update your photo across your Farm Operations Dashboard, Krishi Connect listings, and top navigation.
                 </p>
               </div>
@@ -661,11 +661,11 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
         </div>
 
         {/* Footer Buttons */}
-        <div className="p-4 bg-stone-50 dark:bg-emerald-950 border-t border-stone-200 dark:border-emerald-800 flex items-center justify-between gap-3">
+        <div className="p-4 bg-stone-50 dark:bg-[#082933] border-t border-stone-200 dark:border-cyan-800 flex items-center justify-between gap-3">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2.5 rounded-xl border border-stone-300 dark:border-emerald-800 text-stone-700 dark:text-stone-300 font-bold text-xs hover:bg-stone-100 transition-colors"
+            className="px-4 py-2.5 rounded-xl border border-stone-300 dark:border-cyan-800 text-stone-700 dark:text-stone-300 font-bold text-xs hover:bg-stone-100 transition-colors"
           >
             Cancel
           </button>
@@ -674,7 +674,7 @@ export const PhotoEditorModal: React.FC<PhotoEditorModalProps> = ({
             type="button"
             onClick={handleSave}
             disabled={saving}
-            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-800 to-teal-800 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs flex items-center gap-2 shadow-md disabled:opacity-50 transition-all"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-700 to-teal-700 hover:from-cyan-600 hover:to-teal-600 text-white font-extrabold text-xs flex items-center gap-2 shadow-md disabled:opacity-50 transition-all"
           >
             {saving ? (
               <>

@@ -41,10 +41,105 @@ export interface ChatMessage {
   id: string;
   senderId: string;
   receiverId: string;
+  conversationId?: string;
   text: string;
   imageUrl?: string;
+  attachmentType?: "produce_sample" | "soil_report" | "weighing_slip" | "crop_disease" | "general";
   timestamp: string;
+  createdAt?: string;
   read: boolean;
+}
+
+export type KrishiEntityType = "INDIVIDUAL" | "INSTITUTIONAL";
+export type KrishiRole = "BUYER" | "SELLER" | "farmer" | "buyer" | "seller" | "input_seller";
+export type KrishiCategory =
+  | "Farmer"
+  | "Trader"
+  | "FPO"
+  | "Processor"
+  | "Retailer"
+  | "Wholesaler"
+  | "Input Supplier"
+  | "Exporter"
+  | "Other";
+
+export interface IndianAddress {
+  line1: string;
+  line2?: string;
+  state: string;
+  district: string;
+  tehsil: string;
+  village: string;
+  pincode: string;
+}
+
+export interface KrishiConnectProfile {
+  id: string;
+  userId?: string;
+  entityType: KrishiEntityType;
+  registrationType: "BUYER" | "SELLER";
+  role: "farmer" | "buyer" | "seller";
+  category: KrishiCategory;
+  name: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  guardianRelation?: "S/o" | "D/o" | "W/o";
+  guardianName?: string;
+  dob?: string;
+  age?: number;
+  gender?: "Male" | "Female" | "Other";
+  email: string;
+  phone: string;
+  permanentAddress: IndianAddress;
+  currentAddressSameAsPermanent: boolean;
+  currentAddress?: IndianAddress;
+  crops: string[];
+  product: string;
+  quantity: string;
+  unit?: string;
+  price: string;
+  availability: string;
+  cropsRequired?: string[];
+  primaryCrop?: string;
+  quantityRequired?: string;
+  priceRange?: string;
+  timeline?: string;
+  experience: string;
+  bio: string;
+  photo: string;
+  radiusKm?: number;
+  coordinates: { lat: number; lng: number };
+  approxLocation: string;
+  state: string;
+  district: string;
+  tehsil?: string;
+  village?: string;
+  verified: boolean;
+  distanceKm?: number;
+  rating?: number;
+  totalTrades?: number;
+  createdAt: string;
+}
+
+export type ConnectionStatus = "NOT_CONNECTED" | "REQUEST_SENT" | "CONNECTED" | "BLOCKED";
+
+export interface ConnectionRecord {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  status: ConnectionStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface KrishiConversation {
+  id: string;
+  participantIds: string[];
+  peer: KrishiConnectProfile;
+  lastMessage?: ChatMessage;
+  unreadCount: number;
+  updatedAt: string;
 }
 
 export interface DetectionResult {
@@ -52,7 +147,7 @@ export interface DetectionResult {
   category: "crop" | "produce" | "soil";
   detectionName: string;
   confidence: number;
-  severity: "Low" | "Moderate" | "Severe";
+  severity: "Low" | "Moderate" | "Severe" | "None";
   observedSymptoms: string[];
   possibleCauses: string[];
   recommendedActions: string[];
@@ -61,6 +156,13 @@ export interface DetectionResult {
   scientificDisclaimer: string;
   analyzedAt: string;
   imageUrls: string[];
+  cropName?: string;
+  diagnosis?: string;
+  possibleDisease?: string[];
+  possiblePest?: string[];
+  possibleDeficiency?: string[];
+  expertAdvice?: string;
+  disclaimer?: string;
 }
 
 export interface WeatherData {
@@ -93,6 +195,16 @@ export interface WeatherData {
     pestRisk: "Low" | "Moderate" | "High";
     criticalWarning?: string;
   };
+  hourly?: Array<{
+    time: string;
+    temp: number;
+    rainProb: number;
+    condition: string;
+  }>;
+  sunrise?: string;
+  sunset?: string;
+  lastUpdated?: string;
+  pressureHpa?: number;
 }
 
 export interface CropRecommendation {

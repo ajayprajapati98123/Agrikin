@@ -78,21 +78,21 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24">
-      <div className="bg-white dark:bg-emerald-950 rounded-3xl p-6 sm:p-10 border border-stone-200 dark:border-emerald-800 shadow-xl space-y-8">
+      <div className="bg-[#FFFEFD] rounded-3xl p-6 sm:p-10 border border-[#EAE3D5] shadow-xl space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-200 dark:border-emerald-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#EAE3D5]">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900">
               Farmer Profile & Settings
             </h1>
-            <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+            <p className="text-xs sm:text-sm text-stone-500 mt-1">
               Manage your agricultural identity, crops, land size, and market role.
             </p>
           </div>
 
           {saveSuccess && (
-            <div className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
-              <Check className="w-4 h-4 text-emerald-600" />
+            <div className="px-4 py-2 bg-cyan-50 border border-cyan-200 text-cyan-800 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm">
+              <Check className="w-4 h-4 text-cyan-600" />
               <span>Profile Saved Successfully!</span>
             </div>
           )}
@@ -100,13 +100,13 @@ export default function ProfilePage() {
 
         <form onSubmit={handleSave} className="space-y-6 text-xs">
           {/* Avatar Studio Section */}
-          <div className="p-5 rounded-2xl bg-stone-50 dark:bg-emerald-900/30 border border-stone-200 dark:border-emerald-800 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="p-5 rounded-2xl bg-[#FAF7F0] border border-[#EAE3D5] flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div className="flex items-center gap-5">
               <div className="relative group shrink-0">
                 <img
                   src={formData.avatarUrl || "https://images.unsplash.com/photo-1544717305-2782549b5136?w=200"}
                   alt="Farmer Photo"
-                  className="w-24 h-24 rounded-full object-cover border-4 border-emerald-600 shadow-md"
+                  className="w-24 h-24 rounded-full object-cover border-4 border-cyan-700 shadow-md"
                 />
                 <button
                   type="button"
@@ -120,7 +120,7 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => setPhotoEditorOpen(true)}
-                  className="absolute -bottom-1 -right-1 p-2 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition-transform active:scale-95 cursor-pointer"
+                  className="absolute -bottom-1 -right-1 p-2 rounded-full bg-cyan-700 hover:bg-cyan-800 text-white shadow-md transition-transform active:scale-95 cursor-pointer"
                   title="Edit & Crop Photo"
                 >
                   <Camera className="w-3.5 h-3.5" />
@@ -129,21 +129,21 @@ export default function ProfilePage() {
 
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-extrabold text-stone-900 dark:text-stone-100 text-sm">
+                  <h3 className="font-extrabold text-stone-900 text-sm">
                     Profile Photograph & Digital ID
                   </h3>
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 text-[10px] font-bold border border-emerald-300 dark:border-emerald-700">
+                  <span className="px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 text-[10px] font-bold border border-cyan-200">
                     Live Photo API Active
                   </span>
                 </div>
-                <p className="text-[11px] text-stone-500 dark:text-stone-400 max-w-sm">
+                <p className="text-[11px] text-stone-500 max-w-sm">
                   Upload any image from your mobile device, snap via camera, apply crop & filters, or AI auto-tune.
                 </p>
                 <div className="pt-1.5 flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setPhotoEditorOpen(true)}
-                    className="px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-800 to-teal-800 hover:from-cyan-700 hover:to-teal-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
                   >
                     <Sliders className="w-3.5 h-3.5" />
                     <span>Open Photo Studio</span>
@@ -151,9 +151,9 @@ export default function ProfilePage() {
                   <button
                     type="button"
                     onClick={() => setPhotoEditorOpen(true)}
-                    className="px-3 py-1.5 rounded-xl bg-white dark:bg-emerald-900/60 border border-stone-200 dark:border-emerald-700 text-stone-700 dark:text-stone-200 hover:bg-stone-100 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-[#FFFEFD] border border-[#EAE3D5] text-stone-700 hover:bg-stone-100 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                   >
-                    <Upload className="w-3.5 h-3.5 text-emerald-600" />
+                    <Upload className="w-3.5 h-3.5 text-cyan-700" />
                     <span>Upload Image</span>
                   </button>
                 </div>
@@ -161,13 +161,13 @@ export default function ProfilePage() {
             </div>
 
             <div className="w-full sm:w-64 space-y-1">
-              <label className="font-bold text-stone-700 dark:text-stone-300 text-[11px]">Direct Image URL</label>
+              <label className="font-bold text-stone-700 text-[11px]">Direct Image URL</label>
               <input
                 type="text"
                 value={formData.avatarUrl}
                 onChange={(e) => setFormData({ ...formData, avatarUrl: e.target.value })}
                 placeholder="https://..."
-                className="w-full px-3 py-2 rounded-xl border border-stone-200 dark:border-emerald-800 bg-white dark:bg-emerald-950 text-stone-900 dark:text-stone-100 text-xs"
+                className="w-full px-3 py-2 rounded-xl border border-[#EAE3D5] bg-[#FFFEFD] text-stone-900 text-xs focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
             </div>
           </div>
@@ -175,29 +175,29 @@ export default function ProfilePage() {
           {/* Core Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Full Name</label>
+              <label className="block font-bold text-stone-700 mb-1">Full Name</label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Phone Number</label>
+              <label className="block font-bold text-stone-700 mb-1">Phone Number</label>
               <input
                 type="tel"
                 required
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">State</label>
+              <label className="block font-bold text-stone-700 mb-1">State</label>
               <select
                 value={formData.state}
                 onChange={(e) => {
@@ -208,7 +208,7 @@ export default function ProfilePage() {
                     district: st ? st.districts[0] : "Ludhiana",
                   });
                 }}
-                className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               >
                 {indianStatesAndDistricts.map((s) => (
                   <option key={s.state} value={s.state}>{s.state}</option>
@@ -217,11 +217,11 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">District</label>
+              <label className="block font-bold text-stone-700 mb-1">District</label>
               <select
                 value={formData.district}
                 onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               >
                 {districtOptions.map((d) => (
                   <option key={d} value={d}>{d}</option>
@@ -230,31 +230,31 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Land Holding Area</label>
+              <label className="block font-bold text-stone-700 mb-1">Land Holding Area</label>
               <input
                 type="text"
                 value={formData.landArea}
                 onChange={(e) => setFormData({ ...formData, landArea: e.target.value })}
                 placeholder="e.g. 8.5 Acres"
-                className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Farming Experience</label>
+              <label className="block font-bold text-stone-700 mb-1">Farming Experience</label>
               <input
                 type="text"
                 value={formData.experience}
                 onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
                 placeholder="e.g. 15 Years"
-                className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
             </div>
           </div>
 
           {/* Role Choice */}
           <div>
-            <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Marketplace Role</label>
+            <label className="block font-bold text-stone-700 mb-1">Marketplace Role</label>
             <div className="grid grid-cols-3 gap-3">
               {[
                 { id: "farmer", label: "Farmer / Producer" },
@@ -267,8 +267,8 @@ export default function ProfilePage() {
                   onClick={() => setFormData({ ...formData, role: r.id as any })}
                   className={`py-2.5 px-3 rounded-xl border font-bold transition-all ${
                     formData.role === r.id
-                      ? "bg-emerald-800 text-white border-emerald-800"
-                      : "bg-stone-50 dark:bg-emerald-900/30 text-stone-700 dark:text-stone-300 border-stone-200 dark:border-emerald-800"
+                      ? "bg-gradient-to-r from-cyan-800 to-teal-800 text-white border-cyan-800"
+                      : "bg-[#FAF7F0] text-stone-700 border-[#EAE3D5] hover:border-cyan-400"
                   }`}
                 >
                   {r.label}
@@ -279,7 +279,7 @@ export default function ProfilePage() {
 
           {/* Crops Tag Editor */}
           <div>
-            <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Cultivated Crops</label>
+            <label className="block font-bold text-stone-700 mb-1">Cultivated Crops</label>
             <div className="flex gap-2 mb-2">
               <input
                 type="text"
@@ -287,12 +287,12 @@ export default function ProfilePage() {
                 onChange={(e) => setCropInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleAddCrop())}
                 placeholder="Add crop name..."
-                className="flex-1 px-3 py-2 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+                className="flex-1 px-3 py-2 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
               />
               <button
                 type="button"
                 onClick={handleAddCrop}
-                className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl"
+                className="px-4 py-2 bg-cyan-700 hover:bg-cyan-800 text-white font-bold rounded-xl transition-colors"
               >
                 Add
               </button>
@@ -301,13 +301,13 @@ export default function ProfilePage() {
               {formData.crops.map((c) => (
                 <span
                   key={c}
-                  className="inline-flex items-center gap-1.5 bg-emerald-100 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 px-3 py-1 rounded-xl font-bold"
+                  className="inline-flex items-center gap-1.5 bg-cyan-50 text-cyan-900 border border-cyan-200 px-3 py-1 rounded-xl font-bold"
                 >
                   {c}
                   <button
                     type="button"
                     onClick={() => handleRemoveCrop(c)}
-                    className="text-emerald-700 hover:text-red-600 font-bold ml-1"
+                    className="text-cyan-700 hover:text-red-600 font-bold ml-1"
                   >
                     ×
                   </button>
@@ -318,20 +318,20 @@ export default function ProfilePage() {
 
           {/* Bio */}
           <div>
-            <label className="block font-bold text-stone-700 dark:text-stone-300 mb-1">Farmer Bio</label>
+            <label className="block font-bold text-stone-700 mb-1">Farmer Bio</label>
             <textarea
               rows={3}
               value={formData.bio}
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-              className="w-full px-3 py-2.5 rounded-xl border border-stone-200 dark:border-emerald-800 bg-stone-50 dark:bg-emerald-900/40 text-stone-900 dark:text-stone-100"
+              className="w-full px-3 py-2.5 rounded-xl border border-[#EAE3D5] bg-[#FAF7F0] text-stone-900 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
             />
           </div>
 
           {/* Submit */}
-          <div className="pt-4 border-t border-stone-200 dark:border-emerald-800 flex justify-end">
+          <div className="pt-4 border-t border-[#EAE3D5] flex justify-end">
             <button
               type="submit"
-              className="px-6 py-3 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-2xl shadow flex items-center gap-2 cursor-pointer"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-800 to-teal-800 hover:from-cyan-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-md flex items-center gap-2 cursor-pointer transition-all"
             >
               <Save className="w-4 h-4" />
               <span>Save Profile Changes</span>

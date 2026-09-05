@@ -12,14 +12,14 @@ export const DhartiMaaAvatar: React.FC<{ size?: "sm" | "md" | "lg" | "xl"; class
   };
 
   return (
-    <div className={`relative ${sizeMap[size]} rounded-full overflow-hidden shadow-lg border-2 border-emerald-400 bg-gradient-to-br from-emerald-900 via-teal-800 to-green-700 flex items-center justify-center ${className}`}>
+    <div className={`relative ${sizeMap[size]} rounded-full overflow-hidden shadow-lg border-2 border-cyan-400 bg-gradient-to-br from-[#083344] via-teal-800 to-cyan-700 flex items-center justify-center ${className}`}>
       {/* SVG Vector Artwork: Mother Earth + Nature + Sprout */}
       <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="dhartiBg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#064E3B" />
-            <stop offset="50%" stopColor="#047857" />
-            <stop offset="100%" stopColor="#10B981" />
+            <stop offset="0%" stopColor="#083344" />
+            <stop offset="50%" stopColor="#0891B2" />
+            <stop offset="100%" stopColor="#06B6D4" />
           </linearGradient>
           <linearGradient id="auraGold" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FDE047" />

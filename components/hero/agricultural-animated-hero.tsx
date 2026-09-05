@@ -25,7 +25,7 @@ export const AgriculturalAnimatedHero: React.FC = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[460px] lg:h-[560px] rounded-3xl overflow-hidden shadow-2xl border-2 border-emerald-500/40 group select-none bg-emerald-950"
+      className="relative w-full h-[460px] lg:h-[560px] rounded-3xl overflow-hidden shadow-2xl border-2 border-cyan-500/30 group select-none bg-[#041E27]"
     >
       {/* 1. Base Real Photographic Image with Cinematic Ambient Zoom & Pan */}
       <div
@@ -39,7 +39,7 @@ export const AgriculturalAnimatedHero: React.FC = () => {
       >
         <img
           src="/images/hero-farmer.jpg"
-          alt="Indian Farmer in lush green agricultural field at sunrise"
+          alt="Indian Farmer in lush agricultural field at sunrise"
           className="w-full h-full object-cover object-center"
         />
       </div>
@@ -55,7 +55,7 @@ export const AgriculturalAnimatedHero: React.FC = () => {
       {/* 3. Shimmering Sunlight Rays Across the Horizon */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-60">
         <div
-          className={`w-[200%] h-full bg-gradient-to-r from-transparent via-yellow-200/20 to-transparent -skew-x-12 ${
+          className={`w-[200%] h-full bg-gradient-to-r from-transparent via-cyan-200/20 to-transparent -skew-x-12 ${
             isPlaying ? "animate-[shimmer_8s_linear_infinite]" : ""
           }`}
         />
@@ -63,14 +63,14 @@ export const AgriculturalAnimatedHero: React.FC = () => {
 
       {/* 4. Drifting Morning Mist & Atmospheric Clouds */}
       <div
-        className={`absolute top-16 left-0 right-0 h-36 bg-gradient-to-b from-white/20 via-emerald-100/10 to-transparent pointer-events-none blur-xl ${
+        className={`absolute top-16 left-0 right-0 h-36 bg-gradient-to-b from-white/20 via-cyan-100/10 to-transparent pointer-events-none blur-xl ${
           isPlaying ? "animate-[pulseSlow_6s_ease-in-out_infinite]" : ""
         }`}
       />
 
       {/* 5. Water Canal Glistening Highlight Layer */}
       <div
-        className={`absolute bottom-6 left-4 w-64 h-32 bg-gradient-to-tr from-cyan-300/30 to-transparent rounded-full blur-2xl pointer-events-none ${
+        className={`absolute bottom-6 left-4 w-64 h-32 bg-gradient-to-tr from-cyan-400/35 to-transparent rounded-full blur-2xl pointer-events-none ${
           isPlaying ? "animate-pulse" : ""
         }`}
         style={{ animationDuration: "3s" }}
@@ -80,15 +80,15 @@ export const AgriculturalAnimatedHero: React.FC = () => {
       {isPlaying && (
         <div className="absolute inset-0 pointer-events-none">
           <span className="absolute top-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-yellow-300 opacity-80 shadow-[0_0_8px_#fde047] animate-bounce [animation-duration:3s]" />
-          <span className="absolute top-1/3 left-1/2 w-2 h-2 rounded-full bg-amber-200 opacity-70 shadow-[0_0_10px_#fef08a] animate-pulse [animation-duration:4s]" />
+          <span className="absolute top-1/3 left-1/2 w-2 h-2 rounded-full bg-cyan-200 opacity-70 shadow-[0_0_10px_#a5f3fc] animate-pulse [animation-duration:4s]" />
           <span className="absolute top-1/2 left-1/4 w-1.5 h-1.5 rounded-full bg-yellow-400 opacity-90 shadow-[0_0_8px_#facc15] animate-bounce [animation-duration:5s]" />
-          <span className="absolute top-2/3 left-2/3 w-2 h-2 rounded-full bg-emerald-200 opacity-80 shadow-[0_0_10px_#a7f3d0] animate-pulse [animation-duration:3.5s]" />
+          <span className="absolute top-2/3 left-2/3 w-2 h-2 rounded-full bg-cyan-300 opacity-80 shadow-[0_0_10px_#67e8f9] animate-pulse [animation-duration:3.5s]" />
           <span className="absolute top-1/2 right-1/4 w-1.5 h-1.5 rounded-full bg-yellow-300 opacity-85 shadow-[0_0_8px_#fde047] animate-bounce [animation-duration:4.5s]" />
         </div>
       )}
 
       {/* 7. Subtle Vignette & Natural Contrast Gradients */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-emerald-950/80 via-transparent to-black/20" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#041E27]/90 via-transparent to-black/20" />
 
       {/* 8. Interactive Floating Agricultural Badges */}
       {/* Badge 1: Sunrise & Golden Hour */}
@@ -101,23 +101,23 @@ export const AgriculturalAnimatedHero: React.FC = () => {
 
       {/* Badge 2: Canal Water Flow */}
       <div
-        className="absolute bottom-16 left-6 hidden sm:flex items-center gap-2 bg-emerald-950/80 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-cyan-400/40 text-xs text-white shadow-xl"
+        className="absolute bottom-16 left-6 hidden sm:flex items-center gap-2 bg-[#083344]/85 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-cyan-400/40 text-xs text-white shadow-xl"
       >
         <Droplets className="w-4 h-4 text-cyan-400 animate-bounce [animation-duration:2s]" />
         <div>
           <div className="font-bold text-cyan-200">Fresh Mountain Canal</div>
-          <div className="text-[10px] text-stone-300">Gravity Feed Irrigation Active</div>
+          <div className="text-[10px] text-cyan-100/70">Gravity Feed Irrigation Active</div>
         </div>
       </div>
 
       {/* Badge 3: Crop Vigor */}
       <div
-        className="absolute bottom-6 right-6 flex items-center gap-2 bg-emerald-950/80 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-emerald-400/50 text-xs text-white shadow-xl"
+        className="absolute bottom-6 right-6 flex items-center gap-2 bg-[#083344]/85 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-cyan-400/50 text-xs text-white shadow-xl"
       >
-        <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-ping" />
+        <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
         <div>
-          <div className="font-bold text-emerald-200">Kisan & Healthy Crops</div>
-          <div className="text-[10px] text-stone-300">Vegetative Stage • Disease Free</div>
+          <div className="font-bold text-cyan-200">Kisan & Healthy Crops</div>
+          <div className="text-[10px] text-cyan-100/70">Vegetative Stage • Disease Free</div>
         </div>
       </div>
 

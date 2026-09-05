@@ -38,7 +38,7 @@ export class AIService {
         if (data.reply) {
           return {
             text: data.reply,
-            provider: data.provider || "OpenAI GPT-4o",
+            provider: data.provider || "Grok AI (Realtime)",
           };
         }
       }
@@ -49,7 +49,7 @@ export class AIService {
     // High-fidelity domain-expert AI response generator
     return {
       text: this.generateExpertAgronomyResponse(userMessage, context),
-      provider: "Dharti Maa Agronomy Engine (OpenAI Compatible)",
+      provider: "Dharti Maa Agronomy Engine (Offline Fallback)",
     };
   }
 
@@ -162,13 +162,32 @@ What specific crop, soil, or farm challenge would you like to explore today?`;
    */
   static async detectCropDisease(
     category: "crop" | "produce" | "soil",
-    imageUrls: string[]
+    imageUrls: string[],
+    customApiKey?: string
   ): Promise<DetectionResult> {
-    // Artificial delay to mimic deep neural net inference
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
     if (imageUrls.length > 10) {
       throw new Error("Maximum 10 images allowed for detection analysis.");
+    }
+
+    try {
+      const res = await fetch("/api/detect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category,
+          imageUrls,
+          customApiKey,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.result) {
+          return data.result;
+        }
+      }
+    } catch (err) {
+      console.warn("Call to /api/detect failed, using high-fidelity fallback:", err);
     }
 
     if (category === "soil") {

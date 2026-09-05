@@ -199,11 +199,11 @@ export const Agricultural3DScene: React.FC = () => {
         <div ref={mountRef} className="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing" />
       ) : (
         /* Lightweight High-Quality Fallback for low-power devices */
-        <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-emerald-900 via-emerald-800 to-green-950 flex items-center justify-center p-8">
-          <div className="text-center text-emerald-100">
+        <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[#083344] via-[#0B4052] to-[#041E27] flex items-center justify-center p-8">
+          <div className="text-center text-cyan-100">
             <div className="text-5xl mb-4">🌾⛰️☀️</div>
             <h4 className="text-xl font-bold">Natural Agricultural Basin</h4>
-            <p className="text-xs text-emerald-300 mt-2 max-w-sm mx-auto">
+            <p className="text-xs text-cyan-300 mt-2 max-w-sm mx-auto">
               Optimized 2D canvas active for reduced power mode.
             </p>
           </div>
@@ -211,9 +211,9 @@ export const Agricultural3DScene: React.FC = () => {
       )}
 
       {/* Atmospheric Sunrise Gradient Overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-emerald-950 via-transparent to-transparent opacity-80" />
-      <div className="absolute top-4 right-4 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-[11px] text-emerald-200 flex items-center gap-1.5">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#041E27] via-transparent to-transparent opacity-80" />
+      <div className="absolute top-4 right-4 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-[11px] text-cyan-200 flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
         Interactive 3D Agro-Biome
       </div>
     </div>

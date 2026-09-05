@@ -18,22 +18,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Resolve AI keys across supported providers (Groq / xAI Grok / OpenAI)
+    const groqKey =
+      (customApiKey && customApiKey.startsWith("gsk_") ? customApiKey : null) ||
+      process.env.GROK_API_KEY ||
+      process.env.GROQ_API_KEY ||
+      process.env.GROK_AI ||
+      process.env.Grok_AI ||
+      (process.env.AI_API_KEY && process.env.AI_API_KEY.startsWith("gsk_") ? process.env.AI_API_KEY : null);
+
+    const xaiKey =
+      (customApiKey && customApiKey.startsWith("xai-") ? customApiKey : null) ||
+      process.env.XAI_API_KEY ||
+      (process.env.AI_API_KEY && process.env.AI_API_KEY.startsWith("xai-") ? process.env.AI_API_KEY : null);
+
     const openAiKey =
-      customApiKey ||
+      (customApiKey && customApiKey.startsWith("sk-") ? customApiKey : null) ||
       process.env.OPENAI_API_KEY ||
-      (process.env.AI_API_KEY && process.env.AI_API_KEY.startsWith("sk-")
-        ? process.env.AI_API_KEY
-        : null);
+      (process.env.AI_API_KEY && process.env.AI_API_KEY.startsWith("sk-") ? process.env.AI_API_KEY : null);
 
     const userLang = context.language === "hi" || /[\u0900-\u097F]/.test(message) ? "hi" : "en";
     const userCrop = context.userCrop || "General Crops";
     const userDistrict = context.district || "Local Region";
     const userState = context.state || "India";
 
-    // If an OpenAI API key is available
-    if (openAiKey && openAiKey.startsWith("sk-")) {
-      try {
-        const systemPrompt = `You are 🌱 Dharti Maa (धरती माँ), the revered, motherly, and scientifically rigorous agricultural AI companion and mentor of ȺցɾìҠìղ (AgriKin), dedicated to empowering Indian farmers (Annadata).
+    const systemPrompt = `You are 🌱 Dharti Maa (धरती माँ), the revered, motherly, and scientifically rigorous agricultural AI companion and mentor of ȺցɾìҠìղ (AgriKin), dedicated to empowering Indian farmers (Annadata).
 
 FARMER CONTEXT:
 - State & District: ${userDistrict}, ${userState}
@@ -71,24 +80,116 @@ MANDATORY SCIENTIFIC GUARDRAILS:
 3. If soil query is asked, remind that visual observations cannot replace laboratory soil testing (NPK, pH, EC) and encourage using their Soil Health Card (soilhealth.dac.gov.in).
 4. Structure the response clearly with bullet points, bold key chemicals/dosages, and step-by-step actions.`;
 
-        // Format conversational history (last 6 messages for context)
-        const formattedHistory = (history || []).slice(-6).map((h: any) => ({
-          role: h.sender === "user" || h.role === "user" ? "user" : "assistant",
-          content: h.text || h.content || "",
-        }));
+    // Format conversational history (last 6 messages for context)
+    const formattedHistory = (history || []).slice(-6).map((h: any) => ({
+      role: h.sender === "user" || h.role === "user" ? "user" : "assistant",
+      content: h.text || h.content || "",
+    }));
 
-        // Build user message content (text + optional image)
-        let userContent: any;
+    // 1. Try Groq (Ultra-fast inference: openai/gpt-oss-20b or qwen/qwen3.8-27b)
+    if (groqKey) {
+      const groqModels = ["openai/gpt-oss-20b", "qwen/qwen3.8-27b", "allam-2-7b"];
+      const textContent = image
+        ? `${message.trim()}\n\n[Farmer attached a crop photograph for visual inspection]`
+        : message.trim();
+
+      for (const model of groqModels) {
+        try {
+          const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${groqKey}`,
+            },
+            body: JSON.stringify({
+              model,
+              messages: [
+                { role: "system", content: systemPrompt },
+                ...formattedHistory,
+                { role: "user", content: textContent },
+              ],
+              max_tokens: 800,
+              temperature: 0.3,
+            }),
+          });
+
+          if (groqRes.ok) {
+            const data = await groqRes.json();
+            const reply = data.choices?.[0]?.message?.content;
+            if (reply && reply.trim()) {
+              return NextResponse.json({
+                success: true,
+                provider: `Grok AI (${model.split("/")[1] || model} • Realtime)`,
+                reply: reply.trim(),
+              });
+            }
+          } else {
+            const errText = await groqRes.text();
+            console.warn(`Groq error with ${model}:`, groqRes.status, errText);
+          }
+        } catch (gErr) {
+          console.warn(`Groq fetch failed for ${model}:`, gErr);
+        }
+      }
+    }
+
+    // 2. Try xAI Grok (grok-2-latest / grok-2-vision-1212)
+    if (xaiKey) {
+      try {
+        let userContent: any = message.trim();
         if (image && typeof image === "string" && image.startsWith("data:image")) {
           userContent = [
             { type: "text", text: message.trim() || "Please diagnose this crop photo." },
-            {
-              type: "image_url",
-              image_url: { url: image, detail: "auto" },
-            },
+            { type: "image_url", image_url: { url: image, detail: "auto" } },
           ];
+        }
+
+        const xaiRes = await fetch("https://api.x.ai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${xaiKey}`,
+          },
+          body: JSON.stringify({
+            model: image ? "grok-2-vision-1212" : "grok-2-latest",
+            messages: [
+              { role: "system", content: systemPrompt },
+              ...formattedHistory,
+              { role: "user", content: userContent },
+            ],
+            max_tokens: 1200,
+            temperature: 0.3,
+          }),
+        });
+
+        if (xaiRes.ok) {
+          const data = await xaiRes.json();
+          const reply = data.choices?.[0]?.message?.content;
+          if (reply && reply.trim()) {
+            return NextResponse.json({
+              success: true,
+              provider: image ? "xAI Grok Vision" : "xAI Grok 2",
+              reply: reply.trim(),
+            });
+          }
         } else {
-          userContent = message.trim();
+          const errText = await xaiRes.text();
+          console.warn("xAI API error, attempting next provider:", xaiRes.status, errText);
+        }
+      } catch (xErr) {
+        console.warn("xAI fetch failed:", xErr);
+      }
+    }
+
+    // 3. Try OpenAI (GPT-4o)
+    if (openAiKey) {
+      try {
+        let userContent: any = message.trim();
+        if (image && typeof image === "string" && image.startsWith("data:image")) {
+          userContent = [
+            { type: "text", text: message.trim() || "Please diagnose this crop photo." },
+            { type: "image_url", image_url: { url: image, detail: "auto" } },
+          ];
         }
 
         const openAiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -121,21 +222,19 @@ MANDATORY SCIENTIFIC GUARDRAILS:
           }
         } else {
           const errText = await openAiResponse.text();
-          console.warn("OpenAI Chat API error, using domain-expert agronomic engine:", errText);
+          console.warn("OpenAI Chat API error, using domain-expert agronomic engine:", openAiResponse.status, errText);
         }
       } catch (err) {
         console.warn("OpenAI Chat fetch failed, falling back to agronomy engine:", err);
       }
     }
 
-    // High-Fidelity Domain-Expert Agricultural Fallback Engine
+    // 4. High-Fidelity Domain-Expert Agricultural Fallback Engine
     const fallbackReply = generateDomainExpertAgronomyResponse(message, userLang, userDistrict, userState, userCrop);
 
     return NextResponse.json({
       success: true,
-      provider: openAiKey && openAiKey.startsWith("sk-")
-        ? "OpenAI GPT-4o (Agronomic Engine Fallback)"
-        : "Dharti Maa Agricultural Intelligence Engine (OpenAI Compatible)",
+      provider: "Dharti Maa Agricultural Intelligence Engine (Offline Fallback)",
       reply: fallbackReply,
     });
   } catch (error: any) {
@@ -210,6 +309,7 @@ function generateDomainExpertAgronomyResponse(
     q.includes("termite") ||
     q.includes("दीमक") ||
     q.includes("कीड़ा") ||
+    
     q.includes("कीड़े") ||
     q.includes("pest") ||
     q.includes("insect") ||

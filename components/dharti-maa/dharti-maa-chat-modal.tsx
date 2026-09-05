@@ -159,19 +159,19 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-start p-2 sm:p-6 bg-black/40 backdrop-blur-sm animate-fadeIn">
       {/* Container aligned bottom-left near button on desktop */}
-      <div className="relative w-full max-w-lg h-[92vh] sm:h-[650px] bg-white dark:bg-emerald-950 rounded-2xl sm:rounded-3xl shadow-2xl border border-emerald-500/30 flex flex-col overflow-hidden">
+      <div className="relative w-full max-w-lg h-[92vh] sm:h-[650px] bg-[#FFFEFD] rounded-2xl sm:rounded-3xl shadow-2xl border border-cyan-500/30 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 px-5 py-4 text-white flex items-center justify-between shadow-md">
+        <div className="bg-gradient-to-r from-[#083344] via-[#0E5266] to-[#042129] px-5 py-4 text-white flex items-center justify-between shadow-md">
           <div className="flex items-center gap-3">
             <DhartiMaaAvatar size="md" />
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-lg leading-tight">🌱 Dharti Maa</h3>
-                <span className="bg-emerald-500/30 text-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-400/40">
+                <h3 className="font-bold text-lg leading-tight text-white">🌱 Dharti Maa</h3>
+                <span className="bg-cyan-500/30 text-cyan-200 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-cyan-400/40">
                   AI Companion
                 </span>
               </div>
-              <p className="text-xs text-emerald-200/90">
+              <p className="text-xs text-cyan-100/90">
                 {language === "hi" ? "आपकी डिजिटल कृषि मार्गदर्शक" : "Personal Agricultural AI Guide"}
               </p>
             </div>
@@ -182,7 +182,7 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
               className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
               title="OpenAI API Settings"
             >
-              <Key className="w-4 h-4 text-emerald-200" />
+              <Key className="w-4 h-4 text-cyan-200" />
             </button>
             <button
               onClick={onClose}
@@ -196,18 +196,18 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
 
         {/* OpenAI Connection Settings Drawer */}
         {showSettings && (
-          <div className="p-3.5 bg-emerald-950 text-white border-b border-emerald-800 text-xs space-y-2 animate-fadeIn">
+          <div className="p-3.5 bg-[#083344] text-white border-b border-cyan-800 text-xs space-y-2 animate-fadeIn">
             <div className="flex items-center justify-between font-bold">
-              <span className="flex items-center gap-1.5 text-emerald-300">
-                <Cpu className="w-4 h-4 text-emerald-400" />
+              <span className="flex items-center gap-1.5 text-cyan-300">
+                <Cpu className="w-4 h-4 text-cyan-400" />
                 OpenAI GPT-4o Connection
               </span>
-              <span className="text-[10px] text-emerald-300 bg-emerald-800/80 px-2 py-0.5 rounded-full border border-emerald-500/40">
+              <span className="text-[10px] text-cyan-300 bg-cyan-900 px-2 py-0.5 rounded-full border border-cyan-500/40">
                 Active
               </span>
             </div>
-            <p className="text-[11px] text-emerald-200/80 leading-relaxed">
-              Enter your OpenAI API key (<code className="bg-emerald-900 px-1 py-0.5 rounded text-emerald-100">sk-...</code>) to connect Dharti Maa directly to OpenAI GPT-4o, or leave empty to use our built-in agricultural agronomy engine.
+            <p className="text-[11px] text-cyan-100/80 leading-relaxed">
+              Enter your OpenAI API key (<code className="bg-cyan-950 px-1 py-0.5 rounded text-cyan-200">sk-...</code>) to connect Dharti Maa directly to OpenAI GPT-4o, or leave empty to use our built-in agricultural agronomy engine.
             </p>
             <div className="flex gap-2">
               <input
@@ -215,10 +215,10 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
                 placeholder="sk-proj-..."
                 value={customApiKey}
                 onChange={(e) => handleSaveApiKey(e.target.value)}
-                className="flex-1 bg-emerald-900/60 border border-emerald-600/60 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-emerald-400 font-mono"
+                className="flex-1 bg-cyan-950 border border-cyan-600/60 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-cyan-400 font-mono"
               />
               {customApiKey && (
-                <span className="text-emerald-400 text-xs self-center flex items-center gap-1 font-semibold">
+                <span className="text-cyan-400 text-xs self-center flex items-center gap-1 font-semibold">
                   <Check className="w-3.5 h-3.5" /> Saved
                 </span>
               )}
@@ -227,13 +227,13 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
         )}
 
         {/* Quick Suggestion Chips */}
-        <div className="px-4 py-2 bg-emerald-50/80 dark:bg-emerald-900/30 border-b border-emerald-100 dark:border-emerald-800/40 flex items-center gap-2 overflow-x-auto scrollbar-none">
-          <Sparkles className="w-4 h-4 text-emerald-700 dark:text-emerald-400 shrink-0" />
+        <div className="px-4 py-2 bg-[#FAF7F0] border-b border-[#EAE3D5] flex items-center gap-2 overflow-x-auto scrollbar-none">
+          <Sparkles className="w-4 h-4 text-cyan-700 shrink-0" />
           {quickPrompts.map((chip, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(chip)}
-              className="text-xs bg-white dark:bg-emerald-800/60 hover:bg-emerald-100 dark:hover:bg-emerald-700 text-emerald-900 dark:text-emerald-100 px-3 py-1.5 rounded-full whitespace-nowrap border border-emerald-200 dark:border-emerald-700 transition-all shadow-sm"
+              className="text-xs bg-[#FFFEFD] hover:bg-cyan-50 text-cyan-900 px-3 py-1.5 rounded-full whitespace-nowrap border border-cyan-200 transition-all shadow-xs"
             >
               {chip}
             </button>
@@ -241,7 +241,7 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
         </div>
 
         {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-stone-50 to-white dark:from-emerald-950 dark:to-stone-900">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-[#FAF7F0] to-[#FFFEFD]">
           {messages.map((m) => (
             <div
               key={m.id}
@@ -251,26 +251,26 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
                   m.sender === "user"
-                    ? "bg-emerald-700 text-white rounded-br-none"
-                    : "bg-white dark:bg-emerald-900/70 text-stone-800 dark:text-stone-100 border border-emerald-100 dark:border-emerald-800 rounded-bl-none"
+                    ? "bg-gradient-to-r from-cyan-800 to-teal-800 text-white rounded-br-none"
+                    : "bg-[#FFFEFD] text-stone-800 border border-[#EAE3D5] rounded-bl-none"
                 }`}
               >
                 {m.image && (
-                  <div className="mb-2 rounded-lg overflow-hidden border border-emerald-200">
+                  <div className="mb-2 rounded-lg overflow-hidden border border-cyan-200">
                     <img src={m.image} alt="Uploaded crop sample" className="w-full max-h-48 object-cover" />
                   </div>
                 )}
                 <div className="whitespace-pre-line leading-relaxed">{m.text}</div>
-                <div className="flex items-center justify-between gap-2 mt-1.5 pt-1 border-t border-emerald-100/50 dark:border-emerald-800/50">
+                <div className="flex items-center justify-between gap-2 mt-1.5 pt-1 border-t border-cyan-100/50">
                   {m.provider ? (
-                    <span className="text-[9px] text-emerald-700 dark:text-emerald-300 font-semibold flex items-center gap-1">
-                      <Sparkles className="w-2.5 h-2.5 text-yellow-500" />
+                    <span className="text-[9px] text-cyan-700 font-semibold flex items-center gap-1">
+                      <Sparkles className="w-2.5 h-2.5 text-amber-500" />
                       {m.provider}
                     </span>
                   ) : <span></span>}
                   <span
                     className={`text-[10px] ${
-                      m.sender === "user" ? "text-emerald-200" : "text-stone-400 dark:text-stone-400"
+                      m.sender === "user" ? "text-cyan-200" : "text-stone-400"
                     }`}
                   >
                     {m.timestamp}
@@ -283,9 +283,9 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
           {loading && (
             <div className="flex items-start gap-2.5">
               <DhartiMaaAvatar size="sm" className="mt-1" />
-              <div className="bg-white dark:bg-emerald-900/70 border border-emerald-100 dark:border-emerald-800 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex items-center gap-2">
-                <RefreshCw className="w-4 h-4 text-emerald-600 animate-spin" />
-                <span className="text-xs text-stone-600 dark:text-stone-300">
+              <div className="bg-[#FFFEFD] border border-[#EAE3D5] rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex items-center gap-2">
+                <RefreshCw className="w-4 h-4 text-cyan-600 animate-spin" />
+                <span className="text-xs text-stone-600">
                   {language === "hi" ? "धरती माँ कृषि डेटा का विश्लेषण कर रही हैं..." : "Dharti Maa is reviewing agronomic data..."}
                 </span>
               </div>
@@ -296,10 +296,10 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
 
         {/* Selected Image Preview */}
         {selectedImage && (
-          <div className="px-4 py-2 bg-emerald-50 dark:bg-emerald-900/50 flex items-center justify-between border-t border-emerald-100 dark:border-emerald-800">
+          <div className="px-4 py-2 bg-cyan-50 flex items-center justify-between border-t border-cyan-200">
             <div className="flex items-center gap-2">
               <img src={selectedImage} alt="Preview" className="w-10 h-10 rounded object-cover border" />
-              <span className="text-xs text-emerald-800 dark:text-emerald-200 font-medium">
+              <span className="text-xs text-cyan-900 font-medium">
                 {language === "hi" ? "फसल फोटो संलग्न की गई" : "Crop photo attached"}
               </span>
             </div>
@@ -314,7 +314,7 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
 
         {/* Voice Recording Indicator */}
         {isRecording && (
-          <div className="px-4 py-2 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-xs flex items-center justify-between border-t border-red-200">
+          <div className="px-4 py-2 bg-red-50 text-red-700 text-xs flex items-center justify-between border-t border-red-200">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 bg-red-600 rounded-full animate-ping" />
               <span>{language === "hi" ? "आवाज सुनी जा रही है... बोलिए" : "Listening to voice input... speak now"}</span>
@@ -326,7 +326,7 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
         )}
 
         {/* Input Bar */}
-        <div className="p-3 bg-white dark:bg-emerald-950 border-t border-stone-200 dark:border-emerald-800 flex items-center gap-2">
+        <div className="p-3 bg-[#FFFEFD] border-t border-[#EAE3D5] flex items-center gap-2">
           <input
             type="file"
             ref={fileInputRef}
@@ -337,7 +337,7 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="w-10 h-10 rounded-xl bg-stone-100 dark:bg-emerald-900/60 hover:bg-emerald-100 dark:hover:bg-emerald-800 text-stone-600 dark:text-emerald-300 flex items-center justify-center transition-colors"
+            className="w-10 h-10 rounded-xl bg-[#FAF7F0] hover:bg-cyan-50 text-stone-600 hover:text-cyan-700 flex items-center justify-center transition-colors border border-[#EAE3D5]"
             title="Attach crop photo"
           >
             <ImageIcon className="w-5 h-5" />
@@ -346,10 +346,10 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
           <button
             type="button"
             onClick={toggleMic}
-            className={`w-10 h-10 rounded-xl ${
+            className={`w-10 h-10 rounded-xl border border-[#EAE3D5] ${
               isRecording
                 ? "bg-red-500 text-white animate-pulse"
-                : "bg-stone-100 dark:bg-emerald-900/60 hover:bg-emerald-100 dark:hover:bg-emerald-800 text-stone-600 dark:text-emerald-300"
+                : "bg-[#FAF7F0] hover:bg-cyan-50 text-stone-600 hover:text-cyan-700"
             } flex items-center justify-center transition-colors`}
             title="Voice input"
           >
@@ -366,14 +366,14 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
                 ? "फसल, रोग, मौसम या योजना के बारे में पूछें..."
                 : "Ask about crops, diseases, irrigation, schemes..."
             }
-            className="flex-1 bg-stone-100 dark:bg-emerald-900/40 border border-stone-200 dark:border-emerald-800/60 rounded-xl px-4 py-2.5 text-sm text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="flex-1 bg-[#FAF7F0] border border-[#EAE3D5] rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-cyan-500"
           />
 
           <button
             type="button"
             onClick={() => handleSend()}
             disabled={(!input.trim() && !selectedImage) || loading}
-            className="w-10 h-10 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
+            className="w-10 h-10 rounded-xl bg-gradient-to-r from-cyan-800 to-teal-800 hover:from-cyan-700 hover:to-teal-700 text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
             title="Send"
           >
             <Send className="w-4 h-4" />
@@ -381,7 +381,7 @@ export const DhartiMaaChatModal: React.FC<{ isOpen: boolean; onClose: () => void
         </div>
 
         {/* Safety Disclaimer Footer */}
-        <div className="px-4 py-1.5 bg-stone-100 dark:bg-emerald-950/80 border-t border-stone-200/80 dark:border-emerald-900 text-[10px] text-stone-500 dark:text-stone-400 text-center">
+        <div className="px-4 py-1.5 bg-[#FAF7F0] border-t border-[#EAE3D5] text-[10px] text-stone-500 text-center">
           {language === "hi"
             ? "⚠️ धरती माँ की सलाह मार्गदर्शक है। गंभीर कृषि निर्णय हेतु नजदीकी KVK या कृषि अधिकारी से संपर्क करें।"
             : "⚠️ Guidance is informational. For critical field decisions, consult your local KVK or agricultural officer."}

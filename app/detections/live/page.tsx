@@ -60,7 +60,7 @@ export default function LiveDetectionPage() {
       }
     } else {
       // Fallback high-res leaf sample
-      frameDataUrl = "https://images.unsplash.com/photo-1592417817098-8f3d6910985b?w=600&auto=format&fit=crop&q=80";
+      frameDataUrl = "https://images.unsplash.com/photo-1597916829826-02e5bb4a54e0?w=600&auto=format&fit=crop&q=80";
     }
 
     if (frameDataUrl) {
@@ -92,20 +92,20 @@ export default function LiveDetectionPage() {
       <div className="flex items-center justify-between">
         <Link
           href="/detections"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-300 hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-800 dark:text-cyan-300 hover:underline"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Exit Live Scanner</span>
         </Link>
 
-        <div className="flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/60 rounded-full text-xs font-bold text-emerald-900 dark:text-emerald-200">
+        <div className="flex items-center gap-2 px-3 py-1 bg-cyan-100 dark:bg-cyan-900/60 rounded-full text-xs font-bold text-cyan-900 dark:text-cyan-200">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
           <span>Real-Time Optical Vision Active</span>
         </div>
       </div>
 
       {/* Main Scanner Container */}
-      <div className="relative rounded-3xl bg-black overflow-hidden border border-emerald-500/40 shadow-2xl aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center">
+      <div className="relative rounded-3xl bg-black overflow-hidden border border-cyan-500/40 shadow-2xl aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center">
         {/* Hidden Canvas for Frame Capture */}
         <canvas ref={canvasRef} className="hidden" />
 
@@ -138,14 +138,14 @@ export default function LiveDetectionPage() {
 
         {/* Reticle / Scanning Grid Overlay */}
         <div className="absolute inset-0 pointer-events-none border-[24px] border-black/30 flex items-center justify-center">
-          <div className="w-64 sm:w-80 h-64 sm:h-80 border-2 border-emerald-400/80 rounded-3xl relative">
+          <div className="w-64 sm:w-80 h-64 sm:h-80 border-2 border-cyan-400/80 rounded-3xl relative">
             <div className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-yellow-400 rounded-tl-xl" />
             <div className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-yellow-400 rounded-tr-xl" />
             <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-yellow-400 rounded-bl-xl" />
             <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-yellow-400 rounded-br-xl" />
 
             {!capturedFrame && (
-              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#34d399] animate-[bounce_2.5s_infinite]" />
+              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_12px_#22d3ee] animate-[bounce_2.5s_infinite]" />
             )}
           </div>
         </div>
@@ -160,16 +160,16 @@ export default function LiveDetectionPage() {
 
         {/* Live Diagnostics Card Overlay when Analyzed */}
         {diagnosis && (
-          <div className="absolute bottom-24 inset-x-4 sm:inset-x-12 p-5 rounded-2xl bg-black/85 backdrop-blur-md border border-emerald-500 text-white space-y-2 text-xs shadow-2xl animate-fadeIn">
+          <div className="absolute bottom-24 inset-x-4 sm:inset-x-12 p-5 rounded-2xl bg-black/85 backdrop-blur-md border border-cyan-500 text-white space-y-2 text-xs shadow-2xl animate-fadeIn">
             <div className="flex items-center justify-between">
               <span className="font-extrabold text-sm text-yellow-300">
                 {diagnosis.detectionName}
               </span>
-              <span className="px-2 py-0.5 bg-emerald-600 rounded-full font-bold">
+              <span className="px-2 py-0.5 bg-cyan-600 rounded-full font-bold">
                 Confidence: {diagnosis.confidence}%
               </span>
             </div>
-            <p className="text-emerald-100 line-clamp-2">
+            <p className="text-cyan-100 line-clamp-2">
               <strong>Action:</strong> {diagnosis.recommendedActions[0]}
             </p>
             <div className="flex justify-end pt-1">
@@ -196,10 +196,10 @@ export default function LiveDetectionPage() {
           <button
             onClick={captureFrame}
             disabled={analyzing}
-            className="w-18 h-18 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white p-1 border-4 border-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
+            className="w-18 h-18 rounded-full bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white p-1 border-4 border-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
             title="Capture Frame"
           >
-            <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-emerald-900">
+            <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-cyan-900">
               <Camera className="w-7 h-7" />
             </div>
           </button>

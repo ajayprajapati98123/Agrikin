@@ -9,6 +9,7 @@ import { WeatherData } from "../../lib/types";
 import { DhartiMaaChatModal } from "../../components/dharti-maa/dharti-maa-chat-modal";
 import { PhotoEditorModal } from "../../components/profile/photo-editor-modal";
 import { AuthService } from "../../lib/services/auth.service";
+import { districtCoordinates } from "../../lib/services/location.service";
 import {
   Sprout,
   CloudSun,
@@ -41,14 +42,17 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function loadWeather() {
-      const lat = userCoords?.lat || 30.9010;
-      const lng = userCoords?.lng || 75.8573;
+      const dist = currentUser?.district || "Bareilly";
+      const st = currentUser?.state || "Uttar Pradesh";
+      const distCoords = districtCoordinates[dist];
+      const lat = userCoords?.lat || distCoords?.lat || 28.3670;
+      const lng = userCoords?.lng || distCoords?.lng || 79.4304;
       const data = await WeatherService.getWeatherByCoords(
         lat,
         lng,
-        currentUser?.district ? `${currentUser.district}, ${currentUser.state}` : "Ludhiana, Punjab",
-        currentUser?.state || "Punjab",
-        currentUser?.district || "Ludhiana"
+        `${dist}, ${st}`,
+        st,
+        dist
       );
       setWeather(data);
     }
@@ -60,7 +64,7 @@ export default function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 pb-20">
       {/* 1. Header Banner with Farmer Greeting & Quick Actions */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-green-900 text-white p-6 sm:p-8 shadow-xl border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="rounded-3xl bg-gradient-to-r from-[#083344] via-[#0E5266] to-[#042129] text-white p-6 sm:p-8 shadow-xl border border-cyan-500/40 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-5">
           {/* Farmer Profile Avatar with Edit Button */}
           <div className="relative group shrink-0">
@@ -79,7 +83,7 @@ export default function DashboardPage() {
             </button>
             <button
               onClick={() => setPhotoEditorOpen(true)}
-              className="absolute -bottom-1 -right-1 p-2 rounded-full bg-yellow-400 text-emerald-950 hover:bg-yellow-300 shadow-md transition-transform active:scale-95 cursor-pointer"
+              className="absolute -bottom-1 -right-1 p-2 rounded-full bg-yellow-400 text-cyan-950 hover:bg-yellow-300 shadow-md transition-transform active:scale-95 cursor-pointer"
               title="Edit Profile Photo"
             >
               <Camera className="w-3.5 h-3.5" />
@@ -87,14 +91,14 @@ export default function DashboardPage() {
           </div>
 
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-emerald-500/30 border border-emerald-400/40 text-emerald-200 text-xs font-semibold">
+            <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-cyan-500/30 border border-cyan-400/40 text-cyan-200 text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
               <span>Farm Operations Active • {currentUser?.landArea || "12.5 Acres"}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Welcome back, {currentUser?.name || "Kisan Friend"} 🌱
             </h1>
-            <p className="text-xs sm:text-sm text-emerald-200 max-w-xl">
+            <p className="text-xs sm:text-sm text-cyan-200 max-w-xl">
               {currentUser?.district}, {currentUser?.state} • Cultivating: {currentUser?.crops?.join(", ") || "Wheat, Basmati"}
             </p>
           </div>
@@ -104,28 +108,28 @@ export default function DashboardPage() {
         <div className="flex flex-wrap items-center gap-2.5">
           <Link
             href="/detections"
-            className="px-3.5 py-2.5 rounded-xl bg-white text-emerald-950 hover:bg-stone-100 font-bold text-xs shadow transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2.5 rounded-xl bg-[#FAF7F0] text-cyan-950 hover:bg-[#FDFBF7] font-bold text-xs shadow transition-all flex items-center gap-1.5 border border-cyan-300"
           >
-            <ScanEye className="w-4 h-4 text-emerald-700" />
+            <ScanEye className="w-4 h-4 text-cyan-700" />
             <span>Detect Crop</span>
           </Link>
           <Link
             href="/krishi-connect"
-            className="px-3.5 py-2.5 rounded-xl bg-emerald-700/80 hover:bg-emerald-600 text-white font-bold text-xs border border-emerald-500 transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2.5 rounded-xl bg-cyan-800/90 hover:bg-cyan-700 text-white font-bold text-xs border border-cyan-500/60 transition-all flex items-center gap-1.5 shadow"
           >
             <Users className="w-4 h-4" />
             <span>Find Farmer</span>
           </Link>
           <Link
             href="/weather"
-            className="px-3.5 py-2.5 rounded-xl bg-emerald-700/80 hover:bg-emerald-600 text-white font-bold text-xs border border-emerald-500 transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2.5 rounded-xl bg-cyan-800/90 hover:bg-cyan-700 text-white font-bold text-xs border border-cyan-500/60 transition-all flex items-center gap-1.5 shadow"
           >
             <CloudSun className="w-4 h-4" />
             <span>Check Weather</span>
           </Link>
           <button
             onClick={() => setDhartiMaaOpen(true)}
-            className="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 text-emerald-950 font-bold text-xs shadow transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 text-cyan-950 font-bold text-xs shadow transition-all flex items-center gap-1.5"
           >
             <Sparkles className="w-4 h-4" />
             <span>Ask Dharti Maa</span>
@@ -136,13 +140,13 @@ export default function DashboardPage() {
       {/* 2. Top Summary Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Weather Intelligence Card */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-emerald-950 border border-stone-200 dark:border-emerald-800 shadow-sm flex flex-col justify-between space-y-4">
+        <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all flex flex-col justify-between space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-stone-800 dark:text-stone-100 font-bold text-sm">
-              <CloudSun className="w-5 h-5 text-sky-600" />
+              <CloudSun className="w-5 h-5 text-cyan-600" />
               <span>Live Weather Station</span>
             </div>
-            <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/40 px-2 py-0.5 rounded-full">
+            <span className="text-[11px] font-semibold text-cyan-800 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800 px-2 py-0.5 rounded-full">
               {weather ? `${weather.district}` : "Syncing..."}
             </span>
           </div>
@@ -157,7 +161,7 @@ export default function DashboardPage() {
                   Feels like {weather.feelsLike}°C • {weather.conditionText}
                 </span>
               </div>
-              <div className="grid grid-cols-3 gap-2 text-center text-xs py-2 border-y border-stone-100 dark:border-emerald-900">
+              <div className="grid grid-cols-3 gap-2 text-center text-xs py-2 border-y border-[#EAE3D5] dark:border-cyan-900">
                 <div>
                   <div className="font-bold text-stone-800 dark:text-stone-200">{weather.humidity}%</div>
                   <div className="text-[10px] text-stone-400">Humidity</div>
@@ -171,7 +175,7 @@ export default function DashboardPage() {
                   <div className="text-[10px] text-stone-400">Wind ({weather.windDirection})</div>
                 </div>
               </div>
-              <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-xs text-emerald-900 dark:text-emerald-200 border border-emerald-200/80">
+              <div className="p-2.5 rounded-xl bg-cyan-50/70 dark:bg-cyan-950/30 text-xs text-cyan-950 dark:text-cyan-200 border border-cyan-200/80">
                 <strong>Advisory:</strong> {weather.agriculturalAdvisory.irrigationAdvice}
               </div>
             </div>
@@ -184,7 +188,7 @@ export default function DashboardPage() {
 
           <Link
             href="/weather"
-            className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1 pt-1"
+            className="text-xs font-bold text-cyan-800 dark:text-cyan-400 hover:underline flex items-center gap-1 pt-1"
           >
             <span>7-Day Agricultural Forecast</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -192,15 +196,15 @@ export default function DashboardPage() {
         </div>
 
         {/* My Crops Management */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-emerald-950 border border-stone-200 dark:border-emerald-800 shadow-sm flex flex-col justify-between space-y-4">
+        <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all flex flex-col justify-between space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-stone-800 dark:text-stone-100 font-bold text-sm">
-              <Sprout className="w-5 h-5 text-green-600" />
+              <Sprout className="w-5 h-5 text-teal-600" />
               <span>My Active Crops</span>
             </div>
             <Link
               href="/profile"
-              className="text-[11px] font-semibold text-emerald-700 hover:underline flex items-center gap-1"
+              className="text-[11px] font-semibold text-cyan-700 hover:underline flex items-center gap-1"
             >
               <Plus className="w-3 h-3" /> Edit
             </Link>
@@ -210,10 +214,10 @@ export default function DashboardPage() {
             {(currentUser?.crops || ["Wheat", "Basmati Rice"]).map((crop, idx) => (
               <div
                 key={crop}
-                className="p-3 rounded-2xl bg-stone-50 dark:bg-emerald-900/30 border border-stone-100 dark:border-emerald-800/80 flex items-center justify-between text-xs"
+                className="p-3 rounded-2xl bg-[#FAF7F0] dark:bg-cyan-950/30 border border-[#EAE3D5] dark:border-cyan-800/80 flex items-center justify-between text-xs"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
                   <div>
                     <div className="font-bold text-stone-800 dark:text-stone-200">{crop}</div>
                     <div className="text-[10px] text-stone-500">
@@ -221,7 +225,7 @@ export default function DashboardPage() {
                     </div>
                   </div>
                 </div>
-                <span className="px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 text-[10px] font-semibold">
+                <span className="px-2 py-0.5 rounded-md bg-cyan-100 dark:bg-cyan-800 text-cyan-900 dark:text-cyan-200 text-[10px] font-semibold">
                   Healthy
                 </span>
               </div>
@@ -230,7 +234,7 @@ export default function DashboardPage() {
 
           <Link
             href="/cropify"
-            className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1 pt-1"
+            className="text-xs font-bold text-cyan-800 dark:text-cyan-400 hover:underline flex items-center gap-1 pt-1"
           >
             <span>Explore Next Season Crop Recommendations</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -238,27 +242,27 @@ export default function DashboardPage() {
         </div>
 
         {/* Govt Scheme Status */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-emerald-950 border border-stone-200 dark:border-emerald-800 shadow-sm flex flex-col justify-between space-y-4">
+        <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all flex flex-col justify-between space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-stone-800 dark:text-stone-100 font-bold text-sm">
-              <Building2 className="w-5 h-5 text-blue-600" />
+              <Building2 className="w-5 h-5 text-cyan-600" />
               <span>Government Schemes Active</span>
             </div>
-            <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/40 px-2 py-0.5 rounded-full">
+            <span className="text-[11px] font-semibold text-cyan-800 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-900/40 border border-cyan-200 px-2 py-0.5 rounded-full">
               DBT Verified
             </span>
           </div>
 
           <div className="space-y-2.5 text-xs">
-            <div className="p-3 rounded-2xl bg-blue-50/50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/50 space-y-1">
+            <div className="p-3 rounded-2xl bg-cyan-50/50 dark:bg-cyan-950/30 border border-cyan-100 dark:border-cyan-900/50 space-y-1">
               <div className="flex items-center justify-between font-bold text-stone-800 dark:text-stone-200">
                 <span>PM-Kisan Samman Nidhi</span>
-                <span className="text-emerald-600 dark:text-emerald-400">₹2,000 Credited</span>
+                <span className="text-cyan-700 dark:text-cyan-400 font-bold">₹2,000 Credited</span>
               </div>
               <div className="text-stone-500 text-[11px]">Installment 17 active • eKYC Complete</div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-stone-50 dark:bg-emerald-900/30 border border-stone-100 dark:border-emerald-800/80 space-y-1">
+            <div className="p-3 rounded-2xl bg-[#FAF7F0] dark:bg-cyan-950/30 border border-[#EAE3D5] dark:border-cyan-800/80 space-y-1">
               <div className="flex items-center justify-between font-bold text-stone-800 dark:text-stone-200">
                 <span>PMKSY Drip Subsidy</span>
                 <span className="text-amber-600 font-semibold">Eligible (55%)</span>
@@ -269,7 +273,7 @@ export default function DashboardPage() {
 
           <Link
             href="/govt-schemes"
-            className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1 pt-1"
+            className="text-xs font-bold text-cyan-800 dark:text-cyan-400 hover:underline flex items-center gap-1 pt-1"
           >
             <span>View All 5 Schemes & Application Portals</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -278,11 +282,11 @@ export default function DashboardPage() {
       </div>
 
       {/* 3. Krishi Connect Nearby Matches */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-emerald-950 border border-stone-200 dark:border-emerald-800 shadow-sm space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-stone-900 dark:text-stone-100 flex items-center gap-2">
-              <Users className="w-5 h-5 text-emerald-700" />
+              <Users className="w-5 h-5 text-cyan-700" />
               <span>Nearby Farmers, Traders & Input Suppliers</span>
             </h2>
             <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
@@ -292,9 +296,9 @@ export default function DashboardPage() {
 
           <button
             onClick={() => requestLocation()}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-100 dark:bg-emerald-900/60 hover:bg-emerald-100 text-stone-700 dark:text-stone-200 text-xs font-semibold"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FAF7F0] dark:bg-cyan-950/60 hover:bg-cyan-50 text-stone-700 dark:text-stone-200 text-xs font-semibold border border-[#EAE3D5] dark:border-cyan-800"
           >
-            <Compass className="w-3.5 h-3.5 text-emerald-700" />
+            <Compass className="w-3.5 h-3.5 text-cyan-700" />
             <span>Recalibrate GPS Distance</span>
           </button>
         </div>
@@ -305,22 +309,22 @@ export default function DashboardPage() {
             return (
               <div
                 key={f.id}
-                className="p-5 rounded-2xl bg-stone-50 dark:bg-emerald-900/20 border border-stone-200 dark:border-emerald-800 flex flex-col justify-between space-y-4 hover:shadow-md transition-all"
+                className="p-5 rounded-3xl bg-[#FAF7F0] dark:bg-cyan-950/20 border border-[#EAE3D5] dark:border-cyan-800/60 flex flex-col justify-between space-y-4 hover:shadow-md hover:border-cyan-300 transition-all"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
                     <img
                       src={f.photo}
                       alt={f.name}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-emerald-500"
+                      className="w-12 h-12 rounded-2xl object-cover border-2 border-cyan-600 shadow-xs"
                     />
                     <div>
                       <div className="font-bold text-sm text-stone-900 dark:text-stone-100">{f.name}</div>
                       <div className="text-[11px] text-stone-500 flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-emerald-700" />
+                        <MapPin className="w-3 h-3 text-cyan-700" />
                         <span>{f.approxLocation}</span>
                       </div>
-                      <span className="inline-block mt-0.5 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-800/80 px-2 py-0.2 rounded-full">
+                      <span className="inline-block mt-0.5 text-[10px] font-semibold text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-800/80 px-2 py-0.2 rounded-full">
                         {f.distanceKm ? `${f.distanceKm} km away` : "Nearby"}
                       </span>
                     </div>
@@ -332,10 +336,10 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-2 border-t border-stone-200 dark:border-emerald-800">
+                <div className="flex gap-2 pt-2 border-t border-[#EAE3D5] dark:border-cyan-800">
                   <Link
                     href={`/krishi-connect/chat/${f.id}`}
-                    className="flex-1 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold text-center transition-colors"
+                    className="flex-1 py-2 rounded-xl bg-gradient-to-r from-cyan-800 to-teal-800 hover:from-cyan-700 hover:to-teal-700 text-white text-xs font-bold text-center transition-colors shadow-xs"
                   >
                     Chat & Call
                   </Link>
@@ -343,8 +347,8 @@ export default function DashboardPage() {
                     onClick={() => connectWithFarmer(f.id)}
                     className={`px-3 py-2 rounded-xl text-xs font-bold transition-colors ${
                       isConnected
-                        ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
-                        : "bg-white hover:bg-stone-100 text-stone-800 border border-stone-300"
+                        ? "bg-cyan-100 text-cyan-900 border border-cyan-300"
+                        : "bg-white hover:bg-[#FAF7F0] text-stone-800 border border-[#EAE3D5]"
                     }`}
                   >
                     {isConnected ? "Connected ✓" : "Connect"}
@@ -358,7 +362,7 @@ export default function DashboardPage() {
         <div className="text-right">
           <Link
             href="/krishi-connect"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-800 dark:text-cyan-400 hover:underline"
           >
             <span>Explore All Farmers in Krishi Connect</span>
             <ArrowRight className="w-3.5 h-3.5" />
