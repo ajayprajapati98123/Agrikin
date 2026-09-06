@@ -27,26 +27,26 @@ export const AgriculturalAnimatedHero: React.FC = () => {
       onMouseLeave={handleMouseLeave}
       className="relative w-full h-[460px] lg:h-[560px] rounded-3xl overflow-hidden shadow-2xl border-2 border-[#D4AF37]/50 group select-none bg-[#07130F]"
     >
-      {/* 1. Base Real Photographic Image with Cinematic Ambient Zoom & Pan */}
+      {/* 1. Base 3D Floating Agricultural Ecosystem with Cinematic Ambient Zoom & Pan */}
       <div
         className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-out ${
           isPlaying ? "animate-[pulse_10s_ease-in-out_infinite]" : ""
         }`}
         style={{
-          transform: `scale(${isPlaying ? 1.08 : 1.02}) translate(${mousePos.x}px, ${mousePos.y}px)`,
+          transform: `scale(${isPlaying ? 1.05 : 1.01}) translate(${mousePos.x}px, ${mousePos.y}px)`,
           transition: "transform 0.4s ease-out",
         }}
       >
         <img
-          src="/images/hero-farmer.jpg"
-          alt="Indian Farmer in lush agricultural field at sunrise"
+          src="/images/krishi-hero-island.jpg"
+          alt="3D Floating Agricultural Ecosystem Island with Terraced Crops, Farmhouse, and Waterfall"
           className="w-full h-full object-cover object-center"
         />
       </div>
 
-      {/* 2. Animated Sunrise Sunbeam Flare (Warm Golden Sunrise from Reference) */}
+      {/* 2. Animated Sunrise Sunbeam Flare (Aligned with the 3D Portal Sunrise) */}
       <div
-        className={`absolute -top-10 -left-10 w-96 h-96 pointer-events-none rounded-full bg-gradient-to-br from-[#F5DE98]/50 via-[#D4AF37]/25 to-transparent blur-3xl ${
+        className={`absolute top-2 right-12 w-80 h-80 pointer-events-none rounded-full bg-gradient-to-br from-[#F5DE98]/45 via-[#D4AF37]/20 to-transparent blur-3xl ${
           isPlaying ? "animate-pulse" : ""
         }`}
         style={{ animationDuration: "4s" }}
@@ -63,14 +63,14 @@ export const AgriculturalAnimatedHero: React.FC = () => {
 
       {/* 4. Drifting Morning Mist & Atmospheric Clouds */}
       <div
-        className={`absolute top-16 left-0 right-0 h-36 bg-gradient-to-b from-white/15 via-[#FDFBF7]/5 to-transparent pointer-events-none blur-xl ${
+        className={`absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#07130F]/90 via-white/10 to-transparent pointer-events-none blur-xl ${
           isPlaying ? "animate-[pulseSlow_6s_ease-in-out_infinite]" : ""
         }`}
       />
 
-      {/* 5. Water Canal Glistening Highlight Layer */}
+      {/* 5. Cascading Waterfall & Canal Glistening Highlight Layer */}
       <div
-        className={`absolute bottom-6 left-4 w-64 h-32 bg-gradient-to-tr from-emerald-400/20 via-cyan-400/15 to-transparent rounded-full blur-2xl pointer-events-none ${
+        className={`absolute bottom-6 right-20 w-60 h-40 bg-gradient-to-t from-cyan-400/25 via-emerald-400/15 to-transparent rounded-full blur-2xl pointer-events-none ${
           isPlaying ? "animate-pulse" : ""
         }`}
         style={{ animationDuration: "3s" }}
@@ -87,8 +87,8 @@ export const AgriculturalAnimatedHero: React.FC = () => {
         </div>
       )}
 
-      {/* 7. Subtle Vignette & Natural Contrast Gradients */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#07130F]/90 via-transparent to-black/25" />
+      {/* 7. Natural Contrast & Subtle Vignette */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#07130F]/80 via-transparent to-black/20" />
 
       {/* 8. Interactive Floating Agricultural Badges */}
       {/* Badge 1: Sunrise & Golden Hour */}
