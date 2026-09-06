@@ -35,7 +35,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   const logoGraphic = (
     <div className={`relative flex items-center gap-3 ${className}`}>
       {/* Precision Original Vector Logo: Farmer + Nature + Water + Sun + Crops */}
-      <div className={`relative ${iconDimensions} rounded-2xl bg-gradient-to-br from-[#0A1A14] via-[#0E2B21] to-[#D4AF37]/30 p-1 shadow-md shadow-black/40 flex items-center justify-center overflow-hidden border border-[#D4AF37]/40 group`}>
+      <div className={`relative ${iconDimensions} rounded-2xl bg-gradient-to-br from-cyan-900 via-teal-700 to-cyan-600 p-1 shadow-md shadow-cyan-950/30 flex items-center justify-center overflow-hidden border border-cyan-400/50 group`}>
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full drop-shadow transition-transform duration-300 group-hover:scale-105"
@@ -97,17 +97,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       {showWordmark && (
         <div className="flex flex-col">
           <span
-            className={`font-extrabold tracking-tight ${wordmarkSize} font-brand select-none leading-none ${
-              isLight ? "text-[#FAF7F0]" : "text-[#071411]"
-            }`}
+            className={`font-extrabold tracking-tight ${wordmarkSize} font-brand select-none leading-none text-white drop-shadow-xs`}
             style={{
               letterSpacing: "-0.03em",
             }}
           >
             ȺցɾìҠìղ
           </span>
-          <span className="text-[10px] uppercase tracking-widest font-bold text-[#D4AF37] mt-1">
-            Agri-Tech India
+          <span className="text-[10px] uppercase tracking-widest font-bold text-[#2DD4BF] mt-1">
+            AGRI-TECH INDIA
           </span>
         </div>
       )}
