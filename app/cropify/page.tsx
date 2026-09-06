@@ -14,7 +14,6 @@ import {
   RotateCw,
   Layers,
   Thermometer,
-  TrendingUp,
   Coins,
   Activity,
   Wifi,
@@ -168,7 +167,7 @@ export default function CropifyPage() {
             </span>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-200 text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span>Real-Time API & e-NAM Mandi Connected</span>
+              <span>Real-Time Crop Intelligence</span>
             </div>
             <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-200 text-xs font-medium">
               <Wifi className="w-3 h-3 text-teal-400" />
@@ -177,10 +176,10 @@ export default function CropifyPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Cropify: Real-Time Crop & Mandi Intelligence
+            Cropify: Real-Time Crop Intelligence
           </h1>
           <p className="text-xs sm:text-sm text-cyan-100/90 max-w-2xl leading-relaxed">
-            Harness real-time satellite weather, continuous APMC mandi price discovery, soil NPK telemetry, and ICAR agronomic models to identify the highest ROI crop for your acreage.
+            Harness real-time satellite weather, soil NPK telemetry, and ICAR agronomic models to identify the highest ROI crop for your acreage.
           </p>
         </div>
 
@@ -201,49 +200,6 @@ export default function CropifyPage() {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Real-time Mandi Price Ticker Bar */}
-      <div className="rounded-2xl bg-[#FFFEFD] border border-[#EAE3D5] p-4 shadow-sm flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse" />
-          <span className="text-xs font-extrabold text-stone-900 uppercase tracking-wider flex items-center gap-1">
-            <TrendingUp className="w-3.5 h-3.5 text-cyan-600" />
-            Live Mandi Benchmark Rates (₹/Qtl)
-          </span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3 text-xs">
-          <div className="px-3 py-1.5 rounded-xl bg-[#FAF7F0] border border-[#EAE3D5] text-stone-800 flex items-center gap-2">
-            <span className="font-semibold">Basmati Paddy:</span>
-            <span className="font-bold text-cyan-800">₹4,150</span>
-            <span className="text-[10px] text-cyan-600 font-bold">▲ +3.2%</span>
-          </div>
-          <div className="px-3 py-1.5 rounded-xl bg-[#FAF7F0] border border-[#EAE3D5] text-stone-800 flex items-center gap-2">
-            <span className="font-semibold">Sharbati Wheat:</span>
-            <span className="font-bold text-cyan-800">₹2,780</span>
-            <span className="text-[10px] text-cyan-600 font-bold">▲ +1.8%</span>
-          </div>
-          <div className="px-3 py-1.5 rounded-xl bg-[#FAF7F0] border border-[#EAE3D5] text-stone-800 flex items-center gap-2">
-            <span className="font-semibold">Mustard:</span>
-            <span className="font-bold text-cyan-800">₹5,950</span>
-            <span className="text-[10px] text-cyan-600 font-bold">▲ +4.1%</span>
-          </div>
-          <div className="px-3 py-1.5 rounded-xl bg-[#FAF7F0] border border-[#EAE3D5] text-stone-800 flex items-center gap-2">
-            <span className="font-semibold">Bt Cotton:</span>
-            <span className="font-bold text-cyan-800">₹7,420</span>
-            <span className="text-[10px] text-cyan-600 font-bold">▲ +1.5%</span>
-          </div>
-        </div>
-
-        <button
-          onClick={fetchRecommendations}
-          disabled={loading}
-          className="text-xs font-semibold text-cyan-700 hover:text-cyan-900 flex items-center gap-1.5 transition-colors disabled:opacity-50 ml-auto"
-        >
-          <RotateCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
-          <span>Refresh Live Feed</span>
-        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -394,7 +350,7 @@ export default function CropifyPage() {
                   <option value="High Remuneration & Soil Health">High Remuneration & Soil Health</option>
                   <option value="Water Conservation & Low Input">Water Conservation & Low Input Cost</option>
                   <option value="Household Food Security & Dairy Fodder">Household Food Security & Dairy Fodder</option>
-                  <option value="Export & Mandi Premium">Export & Mandi Premium Grading</option>
+                  <option value="Export & High-Value Commercial">Export & High-Value Commercial Grading</option>
                 </select>
               </div>
 
@@ -553,7 +509,7 @@ export default function CropifyPage() {
                 {loading ? (
                   <>
                     <RotateCw className="w-4 h-4 animate-spin" />
-                    <span>Connecting Real-Time Data & Mandis...</span>
+                    <span>Analyzing Real-Time Satellite & Soil Telemetry...</span>
                   </>
                 ) : (
                   <>
@@ -645,7 +601,7 @@ export default function CropifyPage() {
                     Real-Time Ranked Crop Portfolio
                   </h3>
                   <p className="text-xs text-stone-500">
-                    Ranked by yield potential, live APMC mandi pricing, and NPK soil absorption.
+                    Ranked by yield potential, agronomic suitability, and NPK soil absorption.
                   </p>
                 </div>
                 <span className="text-xs font-semibold text-cyan-800 bg-cyan-50 px-3 py-1.5 rounded-full border border-cyan-200">
@@ -717,7 +673,7 @@ export default function CropifyPage() {
 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                         <div className="bg-[#FFFEFD] p-2.5 rounded-xl border border-[#EAE3D5]">
-                          <div className="text-[10px] text-stone-500">Live Mandi Price</div>
+                          <div className="text-[10px] text-stone-500">Market Price Benchmark</div>
                           <div className="font-extrabold text-stone-900 text-sm">
                             {rec.liveMarketPrice || "₹2,750 / Qtl"}
                           </div>
@@ -822,7 +778,7 @@ export default function CropifyPage() {
                           href="/krishi-connect"
                           className="px-3 py-1.5 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-cyan-800 font-semibold flex items-center gap-1 transition-colors border border-cyan-200 text-xs"
                         >
-                          <span>Connect Mandi Buyers</span>
+                          <span>Connect Verified Buyers</span>
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                         <Link
@@ -840,7 +796,7 @@ export default function CropifyPage() {
 
               {/* Cropify Disclaimer */}
               <div className="p-4 rounded-2xl bg-[#FAF7F0] border border-[#EAE3D5] text-[11px] text-stone-500 text-center leading-relaxed">
-                ⚖️ <strong>Real-Time Agronomic Notice:</strong> Suitability scores, yields, and net profits are calculated continuously from Open-Meteo satellite observations, e-NAM mandi modal rates, and ICAR regional benchmarks. Actual yields remain subject to local weather anomalies, certified seed vigor, and integrated pest management.
+                ⚖️ <strong>Real-Time Agronomic Notice:</strong> Suitability scores, yields, and net profits are calculated continuously from Open-Meteo satellite observations, soil telemetry, and ICAR regional benchmarks. Actual yields remain subject to local weather anomalies, certified seed vigor, and integrated pest management.
               </div>
             </div>
           ) : (
@@ -850,7 +806,7 @@ export default function CropifyPage() {
                 Fetching Real-Time Agronomic Models...
               </div>
               <p className="text-xs max-w-sm text-stone-400">
-                Connecting to Open-Meteo satellite feed, e-NAM mandi price discovery, and soil NPK telemetry algorithms.
+                Connecting to Open-Meteo satellite feed, soil telemetry, and NPK agronomic algorithms.
               </p>
             </div>
           )}

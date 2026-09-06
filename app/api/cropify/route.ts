@@ -27,7 +27,7 @@ const cropMasterDatabase: CropFinancialData[] = [
     cropName: "Basmati / Quality Paddy",
     hindiName: "बासमती धान (चावल)",
     basePricePerQuintal: 4150,
-    marketTrend: "+3.2% (Strong Mandi Demand)",
+    marketTrend: "+3.2% (Strong Market Demand)",
     mspRate: 2320,
     expectedYieldMin: 20,
     expectedYieldMax: 26,
