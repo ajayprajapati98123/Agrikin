@@ -17,10 +17,7 @@ import {
   Coins,
   Activity,
   Wifi,
-  ShieldCheck,
   Scale,
-  CloudSun,
-  Wind,
   Key,
   ChevronDown,
   Info,
@@ -530,64 +527,6 @@ export default function CropifyPage() {
               <div>
                 <p className="font-bold">Recommendation Engine Alert</p>
                 <p>{error}</p>
-              </div>
-            </div>
-          )}
-
-          {/* Live District Telemetry & Weather Banner */}
-          {liveMetadata && (
-            <div className="p-5 rounded-3xl bg-gradient-to-r from-[#083344] via-[#0E5266] to-[#042129] text-white border border-cyan-500/30 shadow-md space-y-4 animate-fadeIn">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
-                <div className="flex items-center gap-2">
-                  <CloudSun className="w-5 h-5 text-amber-300" />
-                  <div>
-                    <span className="text-xs font-bold text-cyan-200 uppercase tracking-wider">
-                      Live District Microclimate Telemetry
-                    </span>
-                    <h4 className="text-sm font-extrabold text-white">
-                      {liveMetadata.district}, {liveMetadata.state}
-                    </h4>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 text-xs">
-                  <span className="px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-200 font-semibold text-[11px]">
-                    🛰️ Satellite Synced
-                  </span>
-                </div>
-              </div>
-
-              {/* Weather matrix pills */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-                <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm">
-                  <div className="text-[10px] text-cyan-200">Air Temperature</div>
-                  <div className="text-base font-extrabold text-white">{liveMetadata.liveWeather?.temperature ?? "--"}°C</div>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm">
-                  <div className="text-[10px] text-cyan-200">Relative Humidity</div>
-                  <div className="text-base font-extrabold text-white">{liveMetadata.liveWeather?.humidity ?? "--"}%</div>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm">
-                  <div className="text-[10px] text-cyan-200">Rain Probability</div>
-                  <div className="text-base font-extrabold text-white">{liveMetadata.liveWeather?.rainProbability ?? "--"}%</div>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm">
-                  <div className="text-[10px] text-cyan-200">Wind Velocity</div>
-                  <div className="text-base font-extrabold text-white">{liveMetadata.liveWeather?.windSpeed ?? "--"} km/h</div>
-                </div>
-              </div>
-
-              {/* AI Agronomist Synthesis Quote */}
-              <div className="p-3.5 rounded-2xl bg-black/30 border border-white/10 text-xs flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                  <span className="font-extrabold text-cyan-300 text-[11px] uppercase tracking-wider block">
-                    ICAR Agronomic Intelligence Note
-                  </span>
-                  <p className="text-stone-200 leading-relaxed text-xs">
-                    "{liveMetadata.aiAgronomistNote}"
-                  </p>
-                </div>
               </div>
             </div>
           )}
