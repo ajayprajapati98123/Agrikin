@@ -355,16 +355,23 @@ export default function HomePage() {
       </section>
 
       {/* 7. FARMER IMPACT & PHILOSOPHY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-        <div className="max-w-2xl mx-auto space-y-3">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-6">
+        <div className="max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-[#D4AF37]/15 border border-[#D4AF37]/40 shadow-xs" style={{ color: "#D4AF37" }}>
+            <span>✨</span>
+            <span>ȺցɾìҠìղ Philosophy</span>
+          </div>
+          <h2
+            className="text-2xl sm:text-4xl font-black tracking-tight leading-snug drop-shadow-xs"
+            style={{ color: "#D4AF37" }}
+          >
             "Technology should empower the farmer, not replace the farmer."
           </h2>
-          <p className="text-stone-600 dark:text-stone-300 text-sm">
-            ȺցɾìҠìղ is engineered as a true companion in the field, helping reduce resource waste, protect crop investments, and connect communities across rural India.
+          <p className="text-[#083344] dark:text-[#083344] text-sm sm:text-base font-semibold max-w-2xl mx-auto leading-relaxed">
+            <span style={{ color: "#D4AF37" }}>ȺցɾìҠìղ</span> is engineered as a true companion in the field, helping reduce resource waste, protect crop investments, and connect communities across rural India.
           </p>
+          <div className="w-20 h-1 rounded-full mx-auto mt-2" style={{ backgroundColor: "#D4AF37" }} />
         </div>
-
       </section>
 
       {/* 8. FINAL CALL TO ACTION */}
