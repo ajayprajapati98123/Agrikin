@@ -6,6 +6,7 @@ interface BrandLogoProps {
   showWordmark?: boolean;
   className?: string;
   href?: string;
+  variant?: "dark" | "light";
 }
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({
@@ -13,6 +14,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showWordmark = true,
   className = "",
   href = "/",
+  variant = "light",
 }) => {
   const iconDimensions = {
     sm: "w-8 h-8",
@@ -28,10 +30,12 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     xl: "text-5xl",
   }[size];
 
+  const isLight = variant === "light";
+
   const logoGraphic = (
     <div className={`relative flex items-center gap-3 ${className}`}>
       {/* Precision Original Vector Logo: Farmer + Nature + Water + Sun + Crops */}
-      <div className={`relative ${iconDimensions} rounded-2xl bg-gradient-to-br from-cyan-800 via-teal-700 to-cyan-500 p-1 shadow-md shadow-cyan-950/20 flex items-center justify-center overflow-hidden border border-cyan-400/30 group`}>
+      <div className={`relative ${iconDimensions} rounded-2xl bg-gradient-to-br from-[#0A1A14] via-[#0E2B21] to-[#D4AF37]/30 p-1 shadow-md shadow-black/40 flex items-center justify-center overflow-hidden border border-[#D4AF37]/40 group`}>
         <svg
           viewBox="0 0 100 100"
           className="w-full h-full drop-shadow transition-transform duration-300 group-hover:scale-105"
@@ -93,14 +97,16 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       {showWordmark && (
         <div className="flex flex-col">
           <span
-            className={`font-extrabold tracking-tight text-[#083344] dark:text-stone-100 ${wordmarkSize} font-brand select-none leading-none`}
+            className={`font-extrabold tracking-tight ${wordmarkSize} font-brand select-none leading-none ${
+              isLight ? "text-[#FAF7F0]" : "text-[#071411]"
+            }`}
             style={{
               letterSpacing: "-0.03em",
             }}
           >
             ȺցɾìҠìղ
           </span>
-          <span className="text-[10px] uppercase tracking-widest font-semibold text-cyan-700 dark:text-cyan-400 mt-1">
+          <span className="text-[10px] uppercase tracking-widest font-bold text-[#D4AF37] mt-1">
             Agri-Tech India
           </span>
         </div>

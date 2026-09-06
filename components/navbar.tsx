@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#FAF7F0]/95 dark:bg-[#082933]/95 backdrop-blur-md border-b border-[#EAE3D5] dark:border-cyan-800/60 transition-colors shadow-xs">
+    <header className="sticky top-0 z-40 w-full bg-[#071411]/92 backdrop-blur-md border-b border-[#D4AF37]/25 transition-colors shadow-lg shadow-black/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Brand Logo & Wordmark */}
         <BrandLogo size="md" showWordmark={true} href="/" />
@@ -49,8 +49,8 @@ export const Navbar: React.FC = () => {
                 href={link.href}
                 className={`px-3 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all ${
                   isActive
-                    ? "bg-gradient-to-r from-cyan-800 to-teal-800 text-white shadow-xs"
-                    : "text-stone-700 dark:text-stone-200 hover:text-cyan-800 dark:hover:text-cyan-300 hover:bg-cyan-50/80 dark:hover:bg-cyan-900/30"
+                    ? "bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/40 shadow-xs font-bold"
+                    : "text-stone-300 hover:text-[#D4AF37] hover:bg-white/5"
                 }`}
               >
                 {link.label}
@@ -62,14 +62,14 @@ export const Navbar: React.FC = () => {
         {/* Action Controls: Language Toggle, Notifications, Profile/Auth */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Bilingual Switch: English | हिंदी */}
-          <div className="flex items-center bg-[#F5EFE6] dark:bg-cyan-950/60 p-1 rounded-xl border border-[#EAE3D5] dark:border-cyan-800 text-xs">
-            <Globe className="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400 ml-1.5 mr-1" />
+          <div className="flex items-center bg-black/40 p-1 rounded-xl border border-[#D4AF37]/30 text-xs">
+            <Globe className="w-3.5 h-3.5 text-[#D4AF37] ml-1.5 mr-1" />
             <button
               onClick={() => setLanguage("en")}
               className={`px-2 py-1 rounded-lg font-medium transition-all ${
                 language === "en"
-                  ? "bg-gradient-to-r from-cyan-700 to-teal-700 text-white shadow-xs font-bold"
-                  : "text-stone-600 dark:text-stone-300 hover:text-stone-900"
+                  ? "bg-gradient-to-r from-[#F5DE98] to-[#D4AF37] text-[#071411] shadow-xs font-bold"
+                  : "text-stone-300 hover:text-white"
               }`}
             >
               EN
@@ -78,8 +78,8 @@ export const Navbar: React.FC = () => {
               onClick={() => setLanguage("hi")}
               className={`px-2 py-1 rounded-lg font-medium transition-all ${
                 language === "hi"
-                  ? "bg-gradient-to-r from-cyan-700 to-teal-700 text-white shadow-xs font-bold"
-                  : "text-stone-600 dark:text-stone-300 hover:text-stone-900"
+                  ? "bg-gradient-to-r from-[#F5DE98] to-[#D4AF37] text-[#071411] shadow-xs font-bold"
+                  : "text-stone-300 hover:text-white"
               }`}
             >
               हिंदी
@@ -94,61 +94,61 @@ export const Navbar: React.FC = () => {
             <div className="relative">
               <button
                 onClick={() => setProfileMenuOpen(!profileMenuOpen)}
-                className="flex items-center gap-2 p-1.5 rounded-full hover:bg-cyan-50 dark:hover:bg-cyan-900/40 border border-[#EAE3D5] dark:border-cyan-800 transition-colors"
+                className="flex items-center gap-2 p-1.5 rounded-full hover:bg-white/5 border border-[#D4AF37]/30 transition-colors"
                 aria-label="User Profile Menu"
               >
                 <img
                   src={currentUser.avatarUrl || "https://images.unsplash.com/photo-1544717305-2782549b5136?w=100"}
                   alt={currentUser.name}
-                  className="w-8 h-8 rounded-full object-cover border border-cyan-600"
+                  className="w-8 h-8 rounded-full object-cover border border-[#D4AF37]"
                 />
-                <span className="hidden md:inline text-xs font-semibold text-stone-800 dark:text-stone-100 max-w-[120px] truncate">
+                <span className="hidden md:inline text-xs font-semibold text-stone-100 max-w-[120px] truncate">
                   {currentUser.name}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 text-stone-500 hidden md:inline" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#D4AF37] hidden md:inline" />
               </button>
 
               {profileMenuOpen && (
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-[#FAF7F0] dark:bg-[#082933] shadow-xl border border-[#EAE3D5] dark:border-cyan-800 py-2 z-50 animate-fadeIn">
-                  <div className="px-4 py-2 border-b border-[#EAE3D5] dark:border-cyan-900">
-                    <div className="text-xs font-bold text-stone-900 dark:text-stone-100 truncate">
+                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-[#0C1E1A] shadow-2xl border border-[#D4AF37]/30 py-2 z-50 animate-fadeIn text-stone-200">
+                  <div className="px-4 py-2 border-b border-white/10">
+                    <div className="text-xs font-bold text-white truncate">
                       {currentUser.name}
                     </div>
-                    <div className="text-[11px] text-stone-500 dark:text-stone-400 capitalize">
+                    <div className="text-[11px] text-[#D4AF37] capitalize">
                       {currentUser.role} • {currentUser.district}
                     </div>
                   </div>
                   <Link
                     href="/dashboard"
                     onClick={() => setProfileMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-700 dark:text-stone-200 hover:bg-cyan-50 dark:hover:bg-cyan-900/30"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-200 hover:bg-[#D4AF37]/15 hover:text-[#D4AF37]"
                   >
                     <span>📊</span> {t("navDashboard")}
                   </Link>
                   <Link
                     href="/profile"
                     onClick={() => setProfileMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-700 dark:text-stone-200 hover:bg-cyan-50 dark:hover:bg-cyan-900/30"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-200 hover:bg-[#D4AF37]/15 hover:text-[#D4AF37]"
                   >
-                    <UserIcon className="w-3.5 h-3.5 text-cyan-700" /> {t("navProfile")}
+                    <UserIcon className="w-3.5 h-3.5 text-[#D4AF37]" /> {t("navProfile")}
                   </Link>
                   <Link
                     href="/krishi-connect"
                     onClick={() => setProfileMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-700 dark:text-stone-200 hover:bg-cyan-50 dark:hover:bg-cyan-900/30"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-200 hover:bg-[#D4AF37]/15 hover:text-[#D4AF37]"
                   >
                     <span>🌾</span> <span>Krishi Connect</span>
                   </Link>
                   <Link
                     href="/krishi-connect/chats"
                     onClick={() => setProfileMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-700 dark:text-stone-200 hover:bg-cyan-50 dark:hover:bg-cyan-900/30"
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs text-stone-200 hover:bg-[#D4AF37]/15 hover:text-[#D4AF37]"
                   >
                     <span>💬</span> <span>Trade Chats</span>
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center gap-2 px-4 py-2.5 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 text-left border-t border-[#EAE3D5] dark:border-cyan-900 mt-1"
+                    className="w-full flex items-center gap-2 px-4 py-2.5 text-xs text-red-400 hover:bg-red-950/40 text-left border-t border-white/10 mt-1"
                   >
                     <LogOut className="w-3.5 h-3.5" /> {t("navLogout")}
                   </button>
@@ -159,13 +159,13 @@ export const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="px-3 py-1.5 text-xs font-bold text-cyan-900 dark:text-cyan-100 hover:bg-cyan-50 dark:hover:bg-cyan-900/40 rounded-xl transition-colors"
+                className="px-3.5 py-1.5 text-xs font-bold text-stone-200 hover:text-[#D4AF37] rounded-xl transition-colors"
               >
                 {t("navLogin")}
               </Link>
               <Link
                 href="/signup"
-                className="px-3.5 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-cyan-700 to-teal-700 hover:from-cyan-600 hover:to-teal-600 rounded-xl shadow-xs transition-colors"
+                className="px-4 py-1.5 text-xs font-bold text-[#071411] bg-gradient-to-r from-[#F5DE98] to-[#D4AF37] hover:brightness-110 rounded-xl shadow-xs transition-all"
               >
                 {t("navSignup")}
               </Link>
