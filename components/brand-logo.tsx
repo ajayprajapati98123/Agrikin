@@ -30,78 +30,44 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   const logoGraphic = (
     <div className={`relative flex items-center gap-3 ${className}`}>
-      {/* Precision Original Vector Logo: Farmer + Nature + Water + Sun + Crops */}
-      <div className={`relative ${iconDimensions} rounded-2xl bg-gradient-to-br from-cyan-800 via-teal-700 to-cyan-500 p-1 shadow-md shadow-cyan-950/20 flex items-center justify-center overflow-hidden border border-cyan-400/30 group`}>
-        <svg
-          viewBox="0 0 100 100"
-          className="w-full h-full drop-shadow transition-transform duration-300 group-hover:scale-105"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Radiant Golden Sunrise */}
-          <circle cx="50" cy="46" r="18" fill="#FBBF24" opacity="0.95" />
-          <path d="M50 20V14M50 78V72M20 46H14M86 46H80M27 23L23 19M77 69L73 65M77 23L81 19M27 69L23 73" stroke="#FDE047" strokeWidth="2.5" strokeLinecap="round" opacity="0.75" />
-
-          {/* Majestic Mountain Silhouette */}
-          <path d="M12 70L38 40L54 58L72 38L92 70Z" fill="#064E3B" opacity="0.7" />
-          <path d="M38 40L44 48L50 43L54 58L42 54Z" fill="#A7F3D0" opacity="0.5" />
-
-          {/* Gentle Water Ripple / River Stream */}
-          <path
-            d="M20 78C32 74 42 82 58 77C72 72 82 79 92 76"
-            stroke="#38BDF8"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-          />
-
-          {/* Lush Green Crop Field Terraces */}
-          <path
-            d="M10 84C28 78 45 88 65 82C80 77 92 84 94 85V95H10V84Z"
-            fill="#15803D"
-          />
-          <path
-            d="M10 90C30 85 55 94 75 88C85 85 92 88 94 89V95H10V90Z"
-            fill="#166534"
-          />
-
-          {/* Sprouting Sacred Seedling / Leaf */}
-          <path
-            d="M50 68C50 56 62 48 68 46C68 56 60 68 50 68Z"
-            fill="#4ADE80"
-          />
-          <path
-            d="M50 68C50 58 40 50 34 49C34 58 42 68 50 68Z"
-            fill="#22C55E"
-          />
-
-          {/* Central Farmer Silhouette + Technological Spark */}
-          <circle cx="50" cy="44" r="5" fill="#FEF3C7" />
-          <path
-            d="M42 43C42 41 46 38 50 38C54 38 58 41 58 43L62 45H38L42 43Z"
-            fill="#B45309"
-          />
-          <path
-            d="M44 50C44 48 47 47 50 47C53 47 56 48 56 50V56H44V50Z"
-            fill="#FEF3C7"
-          />
-        </svg>
-
-        {/* Subtle Tech Glow Spark */}
-        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full animate-ping opacity-75" />
+      {/* Golden Leaf Emblem matching Reference */}
+      <div className={`relative ${iconDimensions} rounded-2xl bg-gradient-to-br from-[#D4AF37] via-[#B8860B] to-[#7A4A10] p-0.5 shadow-lg shadow-[#D4AF37]/20 flex items-center justify-center overflow-hidden border border-[#D4AF37]/40 group`}>
+        <div className="w-full h-full rounded-[14px] bg-gradient-to-br from-[#0C1E1A] to-[#071411] flex items-center justify-center p-1.5">
+          <svg
+            viewBox="0 0 24 24"
+            className="w-full h-full text-[#D4AF37] drop-shadow transition-transform duration-300 group-hover:scale-110 fill-current"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Elegant double leaf motif */}
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 2.21.72 4.25 1.93 5.91C4.3 16.5 5 15.34 6 14.5c2.5-2.1 6.5-2.2 9-0.5 1.8 1.2 2.8 3.3 2.6 5.5 2.63-1.84 4.4-4.94 4.4-8.5 0-4.97-3.58-9-8-9zm-1 14.5c-2.07 0-3.75-1.68-3.75-3.75S8.93 9 11 9s3.75 1.68 3.75 3.75-1.68 3.75-3.75 3.75z" opacity="0.3"/>
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L3.8 21.4c-.11.27.02.57.29.68.1.04.2.04.3.01.21-.06.74-.25 1.55-.59 3.89-1.62 9.06-4.5 11.06-13.5z" fill="url(#goldGrad)"/>
+            <path d="M17 8C10.5 8.5 7.5 13 6.5 17c2.5-1 5.5-1.5 8-1.5 1.5 0 2.8.2 4 .5-.3-2.5-.7-5.5-1.5-8z" fill="#F5DE98" opacity="0.9"/>
+            <defs>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FFF6DD"/>
+                <stop offset="50%" stopColor="#D4AF37"/>
+                <stop offset="100%" stopColor="#996515"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
       </div>
 
       {showWordmark && (
         <div className="flex flex-col">
-          <span
-            className={`font-extrabold tracking-tight text-[#083344] dark:text-stone-100 ${wordmarkSize} font-brand select-none leading-none`}
-            style={{
-              letterSpacing: "-0.03em",
-            }}
-          >
-            ȺցɾìҠìղ
-          </span>
-          <span className="text-[10px] uppercase tracking-widest font-semibold text-cyan-700 dark:text-cyan-400 mt-1">
-            Agri-Tech India
+          <div className="flex items-baseline gap-1.5">
+            <span
+              className={`font-black tracking-tight text-white font-brand select-none leading-none ${wordmarkSize}`}
+              style={{ letterSpacing: "-0.02em" }}
+            >
+              Krishi Connect
+            </span>
+            <span className="text-[10px] font-bold text-[#D4AF37] opacity-75 hidden sm:inline">
+              (ȺցɾìҠìղ)
+            </span>
+          </div>
+          <span className="text-[10px] tracking-wider font-medium text-[#D4AF37] opacity-90 mt-1">
+            Farms Today · Stronger Tomorrow
           </span>
         </div>
       )}

@@ -501,9 +501,9 @@ export class KrishiConnectService {
         line1: "Main Village Road",
         state,
         district,
-        tehsil: newProfileData.permanentAddress?.tehsil || district,
-        village: newProfileData.permanentAddress?.village || "Rural Sector",
-        pincode: newProfileData.permanentAddress?.pincode || "141001",
+        tehsil: (newProfileData.permanentAddress as any)?.tehsil || district,
+        village: (newProfileData.permanentAddress as any)?.village || "Rural Sector",
+        pincode: (newProfileData.permanentAddress as any)?.pincode || "141001",
       },
       currentAddressSameAsPermanent: newProfileData.currentAddressSameAsPermanent ?? true,
       currentAddress: newProfileData.currentAddressSameAsPermanent

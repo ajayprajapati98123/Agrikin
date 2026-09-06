@@ -10,6 +10,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        gold: {
+          50: "#FDFBF4",
+          100: "#F9F3E3",
+          200: "#F2E4BF",
+          300: "#EAD498",
+          400: "#E2C372",
+          500: "#D4AF37",
+          600: "#B8860B",
+          700: "#996515",
+          800: "#7A4A10",
+          900: "#5A330B",
+        },
+        obsidian: {
+          800: "#132A25",
+          900: "#0C1E1A",
+          950: "#071411",
+        },
         milk: {
           50: "#FDFCF9",
           100: "#FAF7F2",
@@ -57,6 +74,8 @@ const config: Config = {
       },
       fontFamily: {
         brand: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        editorial: ["'Playfair Display'", "Georgia", "Cambria", "serif"],
+        script: ["'Caveat'", "cursive", "serif"],
       },
       keyframes: {
         float: {
