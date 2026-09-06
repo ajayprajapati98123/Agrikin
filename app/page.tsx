@@ -442,7 +442,7 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-[#091512] via-[#0E241E] to-[#06100D] text-white text-center space-y-6 shadow-2xl border border-[#D4AF37]/35">
           <h2 className="text-3xl sm:text-4xl font-extrabold">
-            Ready to Transform Your Farm with ȺցɾìҠìղ?
+            Ready to Transform Your Farm with <span style={{ color: "#D4AF37" }}>ȺցɾìҠìղ</span>?
           </h2>
           <p className="text-stone-300 text-sm sm:text-base max-w-xl mx-auto">
             Join thousands of forward-looking Indian farmers utilizing real-time intelligence, direct trade connections, and personalized AI agricultural mentorship.

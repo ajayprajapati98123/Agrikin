@@ -97,14 +97,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       {showWordmark && (
         <div className="flex flex-col">
           <span
-            className={`font-extrabold tracking-tight ${wordmarkSize} font-brand select-none leading-none text-white drop-shadow-xs`}
+            className={`font-black tracking-tight ${wordmarkSize} font-brand select-none leading-none drop-shadow-md`}
             style={{
-              letterSpacing: "-0.03em",
+              letterSpacing: "-0.02em",
+              color: "#D4AF37",
             }}
           >
             ȺցɾìҠìղ
           </span>
-          <span className="text-[10px] uppercase tracking-widest font-bold text-[#2DD4BF] mt-1">
+          <span className="text-[10px] uppercase tracking-widest font-extrabold text-[#2DD4BF] mt-1">
             AGRI-TECH INDIA
           </span>
         </div>
