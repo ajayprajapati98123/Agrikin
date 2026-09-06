@@ -365,24 +365,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-4">
-          <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all">
-            <div className="text-3xl font-extrabold text-cyan-800 dark:text-cyan-300">50%</div>
-            <div className="text-xs text-stone-500 mt-1">Water Saved with Micro-Irrigation</div>
-          </div>
-          <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all">
-            <div className="text-3xl font-extrabold text-cyan-800 dark:text-cyan-300">&lt; 3 Sec</div>
-            <div className="text-xs text-stone-500 mt-1">Instant AI Crop Diagnostics</div>
-          </div>
-          <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all">
-            <div className="text-3xl font-extrabold text-cyan-800 dark:text-cyan-300">₹0 Fee</div>
-            <div className="text-xs text-stone-500 mt-1">Direct Farmer Matchmaking</div>
-          </div>
-          <div className="p-6 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:border-cyan-300 transition-all">
-            <div className="text-3xl font-extrabold text-cyan-800 dark:text-cyan-300">24 / 7</div>
-            <div className="text-xs text-stone-500 mt-1">Dharti Maa AI Assistance</div>
-          </div>
-        </div>
       </section>
 
       {/* 8. FINAL CALL TO ACTION */}
