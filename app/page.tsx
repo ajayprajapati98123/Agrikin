@@ -304,12 +304,9 @@ export default function HomePage() {
           {/* Krishi Connect Preview */}
           <div className="p-8 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:shadow-xl hover:border-cyan-300 transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl p-2.5 bg-amber-50 dark:bg-cyan-950/60 rounded-2xl border border-amber-200 dark:border-cyan-700">🌾</span>
-                <div>
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Krishi Connect</h3>
-                  <p className="text-xs text-stone-500 dark:text-stone-400">Direct Farmer & Buyer Matchmaking</p>
-                </div>
+              <div>
+                <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Krishi Connect</h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400">Direct Farmer & Buyer Matchmaking</p>
               </div>
               <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
                 Connect directly with nearby verified farmers, bulk buyers, and input providers based on approximate distance without middlemen cutting into your margins. Real-time messaging and WebRTC video inspection included.
@@ -335,12 +332,9 @@ export default function HomePage() {
           {/* AI Detections Preview */}
           <div className="p-8 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:shadow-xl hover:border-cyan-300 transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl p-2.5 bg-cyan-50 dark:bg-cyan-950/60 rounded-2xl border border-cyan-200 dark:border-cyan-700">🔬</span>
-                <div>
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">AI Agricultural Detections</h3>
-                  <p className="text-xs text-stone-500 dark:text-stone-400">Multi-Photo & Live Camera Diagnostics</p>
-                </div>
+              <div>
+                <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">AI Agricultural Detections</h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400">Multi-Photo & Live Camera Diagnostics</p>
               </div>
               <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
                 Upload up to 10 photos of affected crop foliage, produce harvest, or topsoil surface. Our vision model returns severity scores, causative pathogens, preventive practices, and chemical spray formulations.
@@ -375,12 +369,9 @@ export default function HomePage() {
           {/* Cropify Preview */}
           <div className="p-8 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:shadow-xl hover:border-cyan-300 transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl p-2.5 bg-teal-50 dark:bg-cyan-950/60 rounded-2xl border border-teal-200 dark:border-cyan-700">🌱</span>
-                <div>
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Cropify AI Recommender</h3>
-                  <p className="text-xs text-stone-500 dark:text-stone-400">Match High-Yielding Crops to Soil & Season</p>
-                </div>
+              <div>
+                <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Cropify AI Recommender</h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400">Match High-Yielding Crops to Soil & Season</p>
               </div>
               <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
                 Eliminate guesswork before sowing. Input your state, district, soil texture, water availability, and land size to receive ranked suitability scores and crop rotation guidance.
@@ -399,12 +390,9 @@ export default function HomePage() {
           {/* Weather Station Preview */}
           <div className="p-8 rounded-3xl bg-[#FFFEFD] dark:bg-[#083344] border border-[#EAE3D5] dark:border-cyan-800/60 shadow-xs hover:shadow-xl hover:border-cyan-300 transition-all flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl p-2.5 bg-cyan-50 dark:bg-cyan-950/60 rounded-2xl border border-cyan-200 dark:border-cyan-700">🌦️</span>
-                <div>
-                  <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Weather Intelligence Station</h3>
-                  <p className="text-xs text-stone-500 dark:text-stone-400">Hyper-Local Forecasts & Field Advisories</p>
-                </div>
+              <div>
+                <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">Weather Intelligence Station</h3>
+                <p className="text-xs text-stone-500 dark:text-stone-400">Hyper-Local Forecasts & Field Advisories</p>
               </div>
               <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed">
                 Access real-time temperature, humidity, precipitation probability, and wind vectors. Receive tailored agricultural advisories that tell you precisely when to spray and when to postpone irrigation.
