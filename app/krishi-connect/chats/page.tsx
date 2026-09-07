@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { Suspense, useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -36,7 +36,7 @@ import {
   X,
 } from "lucide-react";
 
-export default function KrishiConnectChatsPage() {
+function KrishiConnectChatsContent() {
   const searchParams = useSearchParams();
   const requestedPeerId = searchParams.get("peer") || "";
 
@@ -567,5 +567,23 @@ export default function KrishiConnectChatsPage() {
         />
       )}
     </div>
+  );
+}
+
+export default function KrishiConnectChatsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-20">
+          <div className="bg-white dark:bg-[#082933] rounded-3xl border border-stone-200 dark:border-cyan-800 shadow-xl h-[calc(100vh-140px)] min-h-[580px] flex items-center justify-center">
+            <div className="text-sm font-semibold text-stone-500 dark:text-stone-300">
+              Loading trade messages...
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <KrishiConnectChatsContent />
+    </Suspense>
   );
 }
