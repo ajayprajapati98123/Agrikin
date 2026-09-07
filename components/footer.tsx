@@ -6,7 +6,7 @@ import { Phone, Mail, ShieldCheck, Heart } from "lucide-react";
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-gradient-to-b from-[#083344] via-[#062936] to-[#031A22] text-[#FDFBF7] pt-16 pb-12 border-t border-cyan-800/60 shadow-2xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-cyan-800/60">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">

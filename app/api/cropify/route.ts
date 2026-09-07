@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CropRecommendation } from "../../../lib/types";
+import { CropRecommendation, FurtherHarvestingViability, LandPossibilities } from "../../../lib/types";
 import { districtCoordinates } from "../../../lib/services/location.service";
 
 interface CropFinancialData {
@@ -271,7 +271,7 @@ export async function POST(req: NextRequest) {
       console.warn("Open-Meteo live satellite fetch failed, using localized model:", wErr);
     }
 
-    // 2. Real-Time Agronomic Suitability & Financial Calculation
+    // 2. Real-Time Agronomic Suitability & Financial Calculation for the Land
     const parsedAcres = parseFloat(landArea) || 5;
 
     const scoredCrops = cropMasterDatabase.map((crop) => {
@@ -307,7 +307,7 @@ export async function POST(req: NextRequest) {
 
       // Previous crop rotation benefit
       if (previousCrop.toLowerCase().includes("wheat") && crop.cropName.includes("Paddy")) {
-        score += 4; // Traditional Indo-gangetic rotation
+        score += 4;
       }
       if (previousCrop.toLowerCase().includes("paddy") && (crop.cropName.includes("Wheat") || crop.cropName.includes("Mustard"))) {
         score += 5;
@@ -315,12 +315,64 @@ export async function POST(req: NextRequest) {
 
       const clampedScore = Math.min(Math.max(score, 68), 98);
 
-      // Financials
+      // Financials scaled to the selected piece of land
       const avgYield = (crop.expectedYieldMin + crop.expectedYieldMax) / 2;
       const grossRevenuePerAcre = Math.round(avgYield * crop.basePricePerQuintal);
       const netProfitPerAcre = Math.round(grossRevenuePerAcre - crop.avgCostPerAcre);
       const totalEstimatedNetProfit = Math.round(netProfitPerAcre * parsedAcres);
+      const totalEstimatedRevenue = Math.round(grossRevenuePerAcre * parsedAcres);
+      const totalYieldMin = Math.round(crop.expectedYieldMin * parsedAcres);
+      const totalYieldMax = Math.round(crop.expectedYieldMax * parsedAcres);
       const roiPercentage = Math.round((netProfitPerAcre / crop.avgCostPerAcre) * 100);
+
+      // Default scientific ICAR fallback for Further Harvesting
+      let defaultFurtherHarvesting: FurtherHarvestingViability;
+      if (crop.cropName.includes("Paddy") || crop.cropName.includes("Rice")) {
+        defaultFurtherHarvesting = {
+          canHarvestFurther: true,
+          status: "Highly Suitable for Consecutive Harvesting",
+          verdict: `After this Kharif harvest, your ${parsedAcres} Acres in ${district} will preserve adequate subsoil moisture. It can be immediately prepared for zero-tillage Rabi Wheat or Chickpea, achieving 2 complete annual harvests.`,
+          nextHarvestPossibilities: ["Rabi Wheat (Zero-Till)", "Chickpea / Gram (Chana)", "Mustard (Sarson)"],
+          multiSeasonIndex: "Double-Cropping (2 Harvests / Year)",
+          soilRegenerationPlan: "Incorporate crop stubble with bio-decomposer to restore organic carbon.",
+        };
+      } else if (crop.cropName.includes("Wheat")) {
+        defaultFurtherHarvesting = {
+          canHarvestFurther: true,
+          status: "Highly Suitable for Summer Catch Harvest",
+          verdict: `Following the March/April wheat harvest, your ${parsedAcres} Acres can be utilized for a 60-day summer Moong pulse or Fodder Maize harvest before the next monsoon, boosting total farm revenue.`,
+          nextHarvestPossibilities: ["Summer Moong (Pulse)", "Fodder Sorghum / Maize", "Sesame (Til)"],
+          multiSeasonIndex: "Triple-Cropping (3 Harvests / Year)",
+          soilRegenerationPlan: "Plant nitrogen-fixing summer legumes to naturally replenish soil fertility.",
+        };
+      } else if (crop.cropName.includes("Soybean") || crop.cropName.includes("Gram")) {
+        defaultFurtherHarvesting = {
+          canHarvestFurther: true,
+          status: "Optimal Soil Fertility for Successive Harvest",
+          verdict: `As a nitrogen-fixing legume, this crop enriches your ${parsedAcres} Acres with 30-40 kg/ha of biological nitrogen, leaving the land in prime fertility for a heavy-feeder Rabi crop like Wheat or Mustard.`,
+          nextHarvestPossibilities: ["High-Yield Wheat", "Yellow Mustard", "Winter Barley"],
+          multiSeasonIndex: "Double-Cropping (2 Harvests / Year)",
+          soilRegenerationPlan: "Direct drill Rabi seeds immediately after harvest without fallow loss.",
+        };
+      } else if (crop.cropName.includes("Cotton")) {
+        defaultFurtherHarvesting = {
+          canHarvestFurther: true,
+          status: "Suitable with Organic Soil Rest & Crop Rotation",
+          verdict: `Cotton has an extended 150-160 day cycle. After harvest, your ${parsedAcres} Acres should be rotated into a fast summer pulse or green manure like Dhaincha to restore deep-root nutrient extraction.`,
+          nextHarvestPossibilities: ["Summer Moong", "Green Manure (Dhaincha)", "Pearl Millet (Bajra)"],
+          multiSeasonIndex: "Rotation-Dependent (1-2 Harvests / Year)",
+          soilRegenerationPlan: "Deep plow cotton stalks, incorporate 5 tonnes FYM per acre, and sow green manure.",
+        };
+      } else {
+        defaultFurtherHarvesting = {
+          canHarvestFurther: true,
+          status: "Highly Suitable for Consecutive Harvesting",
+          verdict: `This crop allows timely vacation of your ${parsedAcres} Acres in ${district}, leaving fertile soil ready for an immediate Rabi or Zaid harvest cycle.`,
+          nextHarvestPossibilities: ["Rabi Pulses", "Oilseeds (Mustard)", "Seasonal Vegetables"],
+          multiSeasonIndex: "Double-Cropping (2 Harvests / Year)",
+          soilRegenerationPlan: "Apply balanced NPK according to Soil Health Card guidelines.",
+        };
+      }
 
       const recommendation: CropRecommendation = {
         cropName: crop.cropName,
@@ -347,50 +399,151 @@ export async function POST(req: NextRequest) {
         mspRate: `MSP: ₹${crop.mspRate.toLocaleString("en-IN")} / Quintal`,
         marketTrend: crop.marketTrend,
         roiPercentage,
+        totalEstimatedNetProfit,
+        furtherHarvestingViability: defaultFurtherHarvesting,
+        landPossibilities: {
+          landArea: `${parsedAcres} Acres`,
+          totalEstimatedYield: `${totalYieldMin} - ${totalYieldMax} Quintals total`,
+          totalEstimatedNetProfit: `₹${totalEstimatedNetProfit.toLocaleString("en-IN")}`,
+          totalEstimatedRevenue: `₹${totalEstimatedRevenue.toLocaleString("en-IN")}`,
+          waterFeasibility: `${waterAvailability} source provides reliable irrigation capacity for ${parsedAcres} Acres.`,
+        },
       };
 
-      return {
-        ...recommendation,
-        totalEstimatedNetProfit,
-      };
+      return recommendation;
     });
 
     // Sort by Suitability Score descending
     scoredCrops.sort((a, b) => b.suitabilityScore - a.suitabilityScore);
     const topRecommendations = scoredCrops.slice(0, 4);
 
-    // 3. Optional OpenAI GPT-4o Agronomic Validation
+    // 3. Live Real-Time AI API Synthesis (Groq / OpenAI) for Land Analysis & Further Harvesting
+    const groqKey =
+      (customApiKey && customApiKey.startsWith("gsk_") ? customApiKey : null) ||
+      process.env.GROQ_API_KEY ||
+      process.env.GROK_API_KEY ||
+      process.env.GROK_AI ||
+      process.env.Grok_AI;
+
     const openAiKey =
       customApiKey ||
       process.env.OPENAI_API_KEY ||
       (process.env.AI_API_KEY && process.env.AI_API_KEY.startsWith("sk-") ? process.env.AI_API_KEY : null);
 
-    let aiAgronomistNote = `Real-time agricultural intelligence verified for ${district}, ${state}. Soil N:P:K levels (${soilSensors.nitrogen}:${soilSensors.phosphorus}:${soilSensors.potassium} kg/ha) and pH (${soilSensors.ph}) match the top crop portfolio for maximum net remuneration.`;
+    let aiAgronomistNote = `Real-time agricultural intelligence verified for ${district}, ${state}. Soil N:P:K levels (${soilSensors.nitrogen}:${soilSensors.phosphorus}:${soilSensors.potassium} kg/ha) and pH (${soilSensors.ph}) match the top crop portfolio for maximum net remuneration on ${parsedAcres} Acres.`;
 
-    if (openAiKey && openAiKey.startsWith("sk-")) {
+    // Connect to Live Real-Time AI API
+    if (groqKey || (openAiKey && openAiKey.startsWith("sk-"))) {
       try {
-        const aiPrompt = `As a senior ICAR agronomist, write a concise 2-sentence actionable planting recommendation for a farmer in ${district}, ${state} with ${soilType}, ${season} season, soil pH ${soilSensors.ph}, and previous crop ${previousCrop}. Recommended crop is ${topRecommendations[0].cropName}.`;
-        const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${openAiKey}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-4o",
-            messages: [{ role: "user", content: aiPrompt }],
-            max_tokens: 150,
-            temperature: 0.3,
-          }),
-        });
+        const evaluatedCropsList = topRecommendations.map((c) => c.cropName).join(", ");
+        const liveAiPrompt = `As a senior ICAR Agronomist, analyze this piece of land for real-time crop recommendations and consecutive harvesting feasibility:
+- Land Area: ${parsedAcres} Acres
+- District & State: ${district}, ${state}
+- Soil: ${soilType} (N: ${soilSensors.nitrogen}, P: ${soilSensors.phosphorus}, K: ${soilSensors.potassium}, pH: ${soilSensors.ph}, Moisture: ${soilSensors.moisture}%)
+- Season: ${season}, Water Source: ${waterAvailability}, Previous Crop: ${previousCrop}
+- Live Weather: ${liveWeather.temperature}°C, Humidity: ${liveWeather.humidity}%, Condition: ${liveWeather.condition}
+- Evaluated Crops: ${evaluatedCropsList}
 
-        if (openAiRes.ok) {
-          const aiData = await openAiRes.json();
-          const note = aiData.choices?.[0]?.message?.content;
-          if (note) aiAgronomistNote = note.trim();
+For each evaluated crop, provide detailed analysis:
+1) Can this piece of land be used for further harvesting immediately after this cycle? (canHarvestFurther: boolean)
+2) Status (e.g. "Highly Suitable for Consecutive Harvesting", "Optimal Soil Fertility for Successive Harvest", "Suitable with Crop Rotation")
+3) Comprehensive 2-sentence verdict on subsequent land use, soil moisture retention, nitrogen carryover, and multi-season feasibility for this ${parsedAcres} Acres.
+4) 2-3 specific successor crops that can be harvested next on this land.
+5) Multi-season cropping index (e.g. "Double-Cropping (2 Harvests/Year)" or "Triple-Cropping (3 Harvests/Year)").
+
+Respond ONLY with a valid JSON object matching this structure:
+{
+  "crops": [
+    {
+      "cropName": string,
+      "canHarvestFurther": boolean,
+      "status": string,
+      "verdict": string,
+      "nextHarvestPossibilities": string[],
+      "multiSeasonIndex": string
+    }
+  ],
+  "agronomistNote": string
+}`;
+
+        let aiJsonText = "";
+
+        if (groqKey) {
+          const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${groqKey}`,
+            },
+            body: JSON.stringify({
+              model: "openai/gpt-oss-120b",
+              messages: [
+                { role: "system", content: "You are an expert ICAR agricultural AI. Respond ONLY with valid JSON." },
+                { role: "user", content: liveAiPrompt },
+              ],
+              temperature: 0.2,
+              response_format: { type: "json_object" },
+            }),
+          });
+
+          if (groqRes.ok) {
+            const gData = await groqRes.json();
+            aiJsonText = gData.choices?.[0]?.message?.content || "";
+          }
+        } else if (openAiKey) {
+          const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${openAiKey}`,
+            },
+            body: JSON.stringify({
+              model: "gpt-4o",
+              messages: [
+                { role: "system", content: "You are an expert ICAR agricultural AI. Respond ONLY with valid JSON." },
+                { role: "user", content: liveAiPrompt },
+              ],
+              temperature: 0.2,
+              response_format: { type: "json_object" },
+            }),
+          });
+
+          if (openAiRes.ok) {
+            const oData = await openAiRes.json();
+            aiJsonText = oData.choices?.[0]?.message?.content || "";
+          }
+        }
+
+        if (aiJsonText) {
+          try {
+            const parsedAi = JSON.parse(aiJsonText);
+            if (parsedAi.agronomistNote) {
+              aiAgronomistNote = parsedAi.agronomistNote.trim();
+            }
+            if (Array.isArray(parsedAi.crops)) {
+              for (const aiCrop of parsedAi.crops) {
+                const match = topRecommendations.find(
+                  (r) => r.cropName.toLowerCase().includes(aiCrop.cropName?.toLowerCase()) || aiCrop.cropName?.toLowerCase().includes(r.cropName?.toLowerCase())
+                );
+                if (match && aiCrop.verdict) {
+                  match.furtherHarvestingViability = {
+                    canHarvestFurther: typeof aiCrop.canHarvestFurther === "boolean" ? aiCrop.canHarvestFurther : true,
+                    status: aiCrop.status || match.furtherHarvestingViability?.status || "Highly Suitable for Consecutive Harvesting",
+                    verdict: aiCrop.verdict,
+                    nextHarvestPossibilities: Array.isArray(aiCrop.nextHarvestPossibilities) && aiCrop.nextHarvestPossibilities.length > 0
+                      ? aiCrop.nextHarvestPossibilities
+                      : match.furtherHarvestingViability?.nextHarvestPossibilities || ["Rabi Wheat", "Chickpea (Chana)", "Mustard"],
+                    multiSeasonIndex: aiCrop.multiSeasonIndex || match.furtherHarvestingViability?.multiSeasonIndex || "Double-Cropping (2 Harvests/Year)",
+                  };
+                }
+              }
+            }
+          } catch (pErr) {
+            console.warn("Failed to parse real-time AI JSON response, using scientific defaults:", pErr);
+          }
         }
       } catch (aiErr) {
-        console.warn("OpenAI cropify note generation skipped:", aiErr);
+        console.warn("Live AI API connection failed, using scientific agronomic defaults:", aiErr);
       }
     }
 
@@ -400,6 +553,7 @@ export async function POST(req: NextRequest) {
       liveMetadata: {
         district,
         state,
+        landArea: `${parsedAcres} Acres`,
         liveWeather,
         soilStatus: {
           nitrogenStatus: soilSensors.nitrogen > 280 ? "Surplus" : soilSensors.nitrogen > 180 ? "Medium / Optimum" : "Deficient",

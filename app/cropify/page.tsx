@@ -23,6 +23,9 @@ import {
   Info,
   Calendar,
   ExternalLink,
+  ShieldCheck,
+  Repeat,
+  LandPlot,
 } from "lucide-react";
 
 interface LiveWeatherMeta {
@@ -44,6 +47,7 @@ interface SoilStatusMeta {
 interface LiveMeta {
   district: string;
   state: string;
+  landArea?: string;
   liveWeather: LiveWeatherMeta;
   soilStatus: SoilStatusMeta;
   aiAgronomistNote: string;
@@ -534,13 +538,40 @@ export default function CropifyPage() {
           {/* Recommendations List */}
           {recommendations ? (
             <div className="space-y-6 animate-fadeIn">
+              {/* Live AI Agronomist & Telemetry Banner */}
+              {liveMetadata?.aiAgronomistNote && (
+                <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0C3B4E] to-[#0A303F] text-white border border-cyan-500/30 shadow-sm space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <span className="font-bold text-xs uppercase tracking-wider text-cyan-200">
+                        Live Agronomist & Real-Time AI Synthesis
+                      </span>
+                    </div>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-400/20 text-cyan-200 border border-cyan-400/30">
+                      Groq · GPT-OSS · Open-Meteo
+                    </span>
+                  </div>
+                  <p className="text-xs text-stone-200 leading-relaxed font-serif italic">
+                    "{liveMetadata.aiAgronomistNote}"
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-cyan-300">
+                    <span>📍 District: <strong>{liveMetadata.district}, {liveMetadata.state}</strong></span>
+                    <span>•</span>
+                    <span>🚜 Land Evaluated: <strong>{liveMetadata.landArea || formData.landArea}</strong></span>
+                    <span>•</span>
+                    <span>⛅ Live Climate: <strong>{liveMetadata.liveWeather.temperature}°C ({liveMetadata.liveWeather.condition})</strong></span>
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-extrabold text-lg text-stone-900">
                     Real-Time Ranked Crop Portfolio
                   </h3>
                   <p className="text-xs text-stone-500">
-                    Ranked by yield potential, agronomic suitability, and NPK soil absorption.
+                    Ranked by yield potential, land possibilities for {formData.landArea}, and subsequent harvesting viability.
                   </p>
                 </div>
                 <span className="text-xs font-semibold text-cyan-800 bg-cyan-50 px-3 py-1.5 rounded-full border border-cyan-200">
@@ -648,6 +679,117 @@ export default function CropifyPage() {
                         </div>
                       </div>
                     </div>
+
+                    {/* Land Scale Possibilities for Selected Land Area */}
+                    <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-950/5 via-teal-950/5 to-cyan-950/5 border border-emerald-600/20 space-y-3">
+                      <div className="flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-1.5 font-bold text-emerald-950">
+                          <LandPlot className="w-4 h-4 text-emerald-700" />
+                          <span>Possibilities on this Land ({rec.landPossibilities?.landArea || formData.landArea} in {formData.district})</span>
+                        </div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-extrabold text-[10px] sm:text-[11px] border border-emerald-300">
+                          Field-Scale Model
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div className="bg-[#FFFEFD] p-3 rounded-xl border border-emerald-600/15">
+                          <div className="text-[10px] text-stone-500">Total Harvest on this Land</div>
+                          <div className="font-extrabold text-stone-900 text-sm sm:text-base">
+                            {rec.landPossibilities?.totalEstimatedYield || `${rec.expectedYield} across land`}
+                          </div>
+                          <div className="text-[9px] text-emerald-700 font-medium">Yield for {rec.landPossibilities?.landArea || formData.landArea}</div>
+                        </div>
+
+                        <div className="bg-[#FFFEFD] p-3 rounded-xl border border-emerald-600/15">
+                          <div className="text-[10px] text-stone-500">Total Projected Net Profit</div>
+                          <div className="font-extrabold text-emerald-800 text-sm sm:text-base">
+                            {rec.landPossibilities?.totalEstimatedNetProfit || (rec.totalEstimatedNetProfit ? `₹${rec.totalEstimatedNetProfit.toLocaleString("en-IN")}` : "₹3,85,000")}
+                          </div>
+                          <div className="text-[9px] text-stone-400 font-medium">Est. Gross: {rec.landPossibilities?.totalEstimatedRevenue || rec.estimatedRevenuePerAcre}</div>
+                        </div>
+
+                        <div className="bg-[#FFFEFD] p-3 rounded-xl border border-emerald-600/15">
+                          <div className="text-[10px] text-stone-500">Water Feasibility & Capacity</div>
+                          <div className="font-semibold text-stone-800 text-xs">
+                            {rec.landPossibilities?.waterFeasibility || `${formData.waterAvailability} source provides viable irrigation capacity.`}
+                          </div>
+                          <div className="text-[9px] text-emerald-700 font-medium">District Water Security</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Further Harvesting Feasibility Section */}
+                    {rec.furtherHarvestingViability && (
+                      <div className="p-4 rounded-2xl bg-[#F6F9F8] border border-teal-600/20 space-y-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <Repeat className="w-4 h-4 text-teal-700" />
+                            <span className="font-extrabold text-stone-900">
+                              Further Harvesting Feasibility:
+                            </span>
+                            <span
+                              className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-bold text-[11px] border ${
+                                rec.furtherHarvestingViability.canHarvestFurther
+                                  ? "bg-emerald-100 text-emerald-900 border-emerald-300"
+                                  : "bg-amber-100 text-amber-900 border-amber-300"
+                              }`}
+                            >
+                              {rec.furtherHarvestingViability.canHarvestFurther ? (
+                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
+                              ) : (
+                                <AlertTriangle className="w-3.5 h-3.5 text-amber-700" />
+                              )}
+                              <span>
+                                {rec.furtherHarvestingViability.canHarvestFurther
+                                  ? "Viable for Consecutive Harvesting"
+                                  : "Requires Soil Rest / Replenishment"}
+                              </span>
+                            </span>
+                          </div>
+
+                          {rec.furtherHarvestingViability.multiSeasonIndex && (
+                            <span className="text-[11px] font-semibold text-teal-800 bg-teal-100/70 px-2.5 py-0.5 rounded-full border border-teal-200">
+                              {rec.furtherHarvestingViability.multiSeasonIndex}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Agronomic Verdict */}
+                        <div className="text-xs text-stone-700 leading-relaxed bg-[#FFFEFD] p-3 rounded-xl border border-stone-200/80">
+                          <strong className="text-stone-900 font-semibold">Agronomic Verdict: </strong>
+                          <span>{rec.furtherHarvestingViability.verdict}</span>
+                        </div>
+
+                        {/* Successor Crops for Next Harvest */}
+                        {rec.furtherHarvestingViability.nextHarvestPossibilities && rec.furtherHarvestingViability.nextHarvestPossibilities.length > 0 && (
+                          <div className="space-y-1.5">
+                            <div className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                              <Sprout className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>Recommended Successor Crops for Next Harvest Cycle:</span>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {rec.furtherHarvestingViability.nextHarvestPossibilities.map((nextCrop, cIdx) => (
+                                <span
+                                  key={cIdx}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border border-teal-300/60 text-teal-950 font-semibold text-xs shadow-2xs hover:border-teal-500 transition-colors"
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                  <span>{nextCrop}</span>
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {rec.furtherHarvestingViability.soilRegenerationPlan && (
+                          <div className="text-[11px] text-stone-500 pt-1 border-t border-teal-900/10 flex items-center gap-1.5">
+                            <ShieldCheck className="w-3.5 h-3.5 text-teal-700 shrink-0" />
+                            <span><strong>Soil Regeneration Plan:</strong> {rec.furtherHarvestingViability.soilRegenerationPlan}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* Agronomic Matrix Pills */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs pt-1">

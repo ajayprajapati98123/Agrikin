@@ -129,7 +129,7 @@ export default function HomePage() {
           <BotanicalLeaf size={125} rotation={-26} blur={true} opacity={0.92} />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Content (Preserved exactly as-is!) */}
             <div className="lg:col-span-6 space-y-6 text-left">
@@ -222,7 +222,7 @@ export default function HomePage() {
 
           {/* Slogan & Scroll Indicator resting seamlessly on the Ivory Wave */}
           <div className="bg-[#FAF7F0] -mt-1 pb-4">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-medium text-stone-700">
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-medium text-stone-700">
               <div className="flex items-center gap-2">
                 <span className="text-[#D4AF37] text-base">🌾</span>
                 <span className="font-semibold text-stone-700 tracking-wide">Rooted in Trust. Growing for Generations.</span>
@@ -237,7 +237,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. SIX CORE AGRICULTURAL FEATURES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#6B500B] bg-[#D4AF37]/15 px-3 py-1 rounded-full border border-[#D4AF37]/40 shadow-xs">
             <span>🌾 Integrated Ecosystem</span>
@@ -290,7 +290,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. MEET DHARTI MAA (SPECIAL FEATURE SPOTLIGHT) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
         <div className="relative rounded-3xl bg-gradient-to-br from-[#091512] via-[#0E251F] to-[#06100D] text-white p-8 sm:p-12 overflow-hidden shadow-2xl border border-[#D4AF37]/35">
           <div className="absolute -right-16 -bottom-16 w-80 h-80 bg-[#D4AF37]/12 rounded-full blur-3xl pointer-events-none" />
           
@@ -364,7 +364,7 @@ export default function HomePage() {
       </section>
 
       {/* 6. GOVERNMENT SCHEMES & IRRIGATION HIGHLIGHT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#091512] via-[#0E231D] to-[#06100D] text-white shadow-xl space-y-8 border border-[#D4AF37]/35">
           <div className="max-w-2xl space-y-2">
             <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
@@ -419,7 +419,7 @@ export default function HomePage() {
       </section>
 
       {/* 7. FARMER IMPACT & PHILOSOPHY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-6">
+      <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 text-center py-6">
         <div className="max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-[#D4AF37]/15 border border-[#D4AF37]/40 shadow-xs" style={{ color: "#D4AF37" }}>
             <span>✨</span>
@@ -439,7 +439,7 @@ export default function HomePage() {
       </section>
 
       {/* 8. FINAL CALL TO ACTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
         <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-[#091512] via-[#0E241E] to-[#06100D] text-white text-center space-y-6 shadow-2xl border border-[#D4AF37]/35">
           <h2 className="text-3xl sm:text-4xl font-extrabold">
             Ready to Transform Your Farm with <span style={{ color: "#D4AF37" }}>ȺցɾìҠìղ</span>?

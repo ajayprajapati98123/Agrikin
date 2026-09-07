@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#071411]/92 backdrop-blur-md border-b border-[#D4AF37]/25 transition-colors shadow-lg shadow-black/25">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 h-18 flex items-center justify-between">
         {/* Brand Logo & Wordmark */}
         <BrandLogo size="md" showWordmark={true} href="/" />
 

@@ -207,6 +207,23 @@ export interface WeatherData {
   pressureHpa?: number;
 }
 
+export interface FurtherHarvestingViability {
+  canHarvestFurther: boolean;
+  status: string;
+  verdict: string;
+  nextHarvestPossibilities: string[];
+  multiSeasonIndex?: string;
+  soilRegenerationPlan?: string;
+}
+
+export interface LandPossibilities {
+  landArea: string;
+  totalEstimatedYield: string;
+  totalEstimatedNetProfit: string;
+  totalEstimatedRevenue?: string;
+  waterFeasibility: string;
+}
+
 export interface CropRecommendation {
   cropName: string;
   hindiName: string;
@@ -230,6 +247,8 @@ export interface CropRecommendation {
   marketTrend?: string;
   roiPercentage?: number;
   totalEstimatedNetProfit?: number;
+  furtherHarvestingViability?: FurtherHarvestingViability;
+  landPossibilities?: LandPossibilities;
 }
 
 export interface GovernmentScheme {
